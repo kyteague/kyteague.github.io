@@ -4,7 +4,7 @@
  *  Part of the jsMath package for mathematics on the web.
  *
  *  This file is a plugin that searches text within a web page
- *  for \(...\), \[...\], $...$ and $$...$$ and converts them to
+ *  for \(...\), \[...\], $...$ and <img class="mathtex" src="{{ media_url('images/mathtex') }}/2f43b42fd833d1e77420a8dae7419000.png" /> and converts them to
  *  the appropriate <SPAN CLASS="math">...</SPAN> or
  *  <DIV CLASS="math">...</DIV> tags.
  *

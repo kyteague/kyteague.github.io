@@ -52,11 +52,11 @@ jsMath.Easy = {
   //
   processSlashParens: 1,       // process \(...\) in text?
   processSlashBrackets: 1,     // process \[...\] in text?
-  processDoubleDollars: 1,     // process $$...$$ in text?
+  processDoubleDollars: 1,     // process <img class="mathtex" src="{{ media_url('images/mathtex') }}/2f43b42fd833d1e77420a8dae7419000.png" /> in text?
   processSingleDollars: 0,     // process $...$ in text?
   processLaTeXenvironments: 0, // process \begin{xxx}...\end{xxx} outside math mode?
   fixEscapedDollars: 0,        // convert \$ to $ outside of math mode?
-  doubleDollarsAreInLine: 0,   // make $$...$$ be in-line math?
+  doubleDollarsAreInLine: 0,   // make <img class="mathtex" src="{{ media_url('images/mathtex') }}/2f43b42fd833d1e77420a8dae7419000.png" /> be in-line math?
   allowDisableTag: 1,          // allow ID="tex2math_off" to disable tex2math?
   //
   //  If you want to use your own custom delimiters for math instead

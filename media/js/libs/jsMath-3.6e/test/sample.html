@@ -56,7 +56,7 @@ plugin to identify the mathematics in your document by looking for <SPAN
 class="math">\rm\TeX</SPAN>-like math delimiters.  Here are some math
 equations using those markers.  Some inline math: $\sqrt{1-x^2}$ or \(ax^2+bx+c\), 
 and some displayed math:
-$$\int {1\over x}\,dx = \ln(x)+C$$
+<img class="mathtex" src="{{ media_url('images/mathtex') }}/3ba660b57e84cf7d87fca9fba03a8230.png" />
 and
 \[\sum_{i=1}^n i = {n(n+1)\over 2}.\]
 Note that the first of these will not be processed unless you have enabled
@@ -92,7 +92,7 @@ of a page by enclosing it in a tag that is of
 <CODE>DIV</CODE> or <CODE>SPAN</CODE>, but it can be anything.  This
 paragraph is wrapped in a DIV tag with
 <CODE>CLASS="tex2math_ignore"</CODE>, and so no math delimiters will be
-processed:  $f\colon X\to Y$, \(x^2 \gt 5\), $$1\over 1+x^2$$ and
+processed:  $f\colon X\to Y$, \(x^2 \gt 5\), <img class="mathtex" src="{{ media_url('images/mathtex') }}/d737e24411e39e51923f8b02ac41fff2.png" /> and
 \[\matrix{a& b\cr c& d}.\]
 Note that this includes the processing of escaped dollars (\$) and 
 custom delimiters ([math]a \mapsto a^2[/math]) as well.
@@ -104,7 +104,7 @@ JsMath will automatically ignore the text within
 <CODE>PRE</CODE> tags, so you can easily enter examples that way as well:
 <PRE>
    $f\colon X\to Y$, \(x^2 \gt 5\),
-   $$1\over 1+x^2$$ and \[\matrix{a& b\cr c& d}.\]
+   <img class="mathtex" src="{{ media_url('images/mathtex') }}/d737e24411e39e51923f8b02ac41fff2.png" /> and \[\matrix{a& b\cr c& d}.\]
 </PRE>
 <P>
 

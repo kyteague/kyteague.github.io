@@ -4,31 +4,29 @@
         BASIC blog excerpts feed    </title>
         <link href="blog/excerpts.xml" rel="self" />
     
-        <link href="/"/>
+        <link href="http://kyleteague.com/"/>
     
         
-    <updated>2011-10-14T16:37:30Z</updated>
+    <updated>2011-10-18T02:54:23Z</updated>
 
-    <id>/blog/excerpts.xml/</id>
+    <id>http://kyleteague.com/blog/excerpts.xml/</id>
 
             <entry>
-            <title type="html">A Happy Post</title>
-            <author><name>Lakshmi Vyasarajan</name></author>
-            <link href="/blog/happy-post.html"/>
-            <updated>2011-02-01T10:00:00Z</updated>
-            <published>2011-02-01T10:00:00Z</published>
-            <id>/blog/happy-post.html</id>
-                        <category   scheme="/blog/tags"
-                        term="happy"
-                        label="Happy" />
-                        <category   scheme="/blog/tags"
-                        term="thoughts"
-                        label="Thoughts" />
+            <title type="html">How We Finished in the Top 10 in the KDD Cup</title>
+            <author><name>Kyle Teague</name></author>
+            <link href="http://kyleteague.com/blog/top-10-kdd-cup.html"/>
+            <updated>2011-10-18T06:51:00Z</updated>
+            <published>2011-10-18T06:51:00Z</published>
+            <id>http://kyleteague.com/blog/top-10-kdd-cup.html</id>
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="kdd"
+                        label="Kdd" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="square counting"
+                        label="Square Counting" />
             
             <content type="html">
-                &lt;p&gt;&lt;img alt=&#34;Airport&#34; src=&#34;/media/images/airport.png&#34; /&gt;&lt;/p&gt;
-                &lt;p&gt;Lady Malvern was a hearty, happy, healthy, overpowering sort of dashed female,
-not so very tall but making up for it by measuring about six feet from the
-&lt;span class=&#34;caps&#34;&gt;O.P.&lt;/span&gt; to the Prompt&amp;nbsp;Side.&lt;/p&gt;            </content>
+                
+                            </content>
         </entry>
     </feed>
