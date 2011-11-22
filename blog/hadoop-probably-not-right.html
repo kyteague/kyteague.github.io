@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+                <link rel="stylesheet" href="/media/css/site.css">
+        
+                <script src="/media/js/libs/jquery-1.5.1.min.js"></script>
+        <script src="/media/js/libs/jquery.timeago.js"></script>
+                <script>
+jQuery(document).ready(function() {
+  jQuery("abbr.timeago").timeago();
+});
+        </script>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=290766799313";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+                <div id="container">
+<div id="site_title">
+<h1><a href="/">Musings on Tech</a></h1>
+</div>
+<p>My name is Kyle Teague and I'm the data scientist for <a href="http://getglue.com/kyleteague">GetGlue</a>.  This is my blog.</p>
+<a href="http://feeds.feedburner.com/kyleteague" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/media/images/Feed-icon.png" /></a>
+<a href="http://www.facebook.com/kyleteague" title="Find me on Facebook"><img src="/media/images/Facebook-icon.png" /></a>
+<a href="http://twitter.com/kyteague" title="Follow me on Twitter"><img src="/media/images/Twitter-icon.png" /></a>
+<a href="http://www.linkedin.com/in/kyleteague" title="Find me on LinkedIn"><img src="/media/images/LinkedIn-icon.png" /></a>
+            <article>
+<h1 class="title">
+    <a href="/blog/hadoop-probably-not-right.html">
+        
+    </a>
+</h1>
+<div class="post_time">
+Posted
+<abbr class="timeago" title="2011-10-14T00:00:00Z">
+    Fri, 14 Oct 2011
+</abbr>
+</div>
+<div id="share_container">
+<div id="twitter_share">
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="kyteague" data-url="http://kyleteague.com/blog/hadoop-probably-not-right.html" data-text="">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+</div>
+<div id="facebook_like">
+<div class="fb-like" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-href="http://kyleteague.com/blog/hadoop-probably-not-right.html"></div>
+</div>
+<div style="clear: both"></div>
+</div>
+
+
+<div class="post_body">
+<p>Why Hadoop Probably Isn&#8217;t Right For Your&nbsp;Problem</p>
+<p>Hadoop is an interesting project, but I believe there are rare cases where it is useful.  It is really meant for embarassingly parallel I/O bound &#8220;Big Data&#8221; problems.  It has become a solution looking for a problem.  I experienced and have heard of many companies building up huge Hadoop clusters just to have them site there and use it for&nbsp;marketing.</p>
+<p>Problems where Hadoop MapReduce is useful:
+- Embarassingly Parallel
+    Splitting up the problem gives a linear speed-up, in other words, N machines makes it go N times faster.
+- I/O Bound
+    Most of the time is spent reading off the disk, not necessarily doing any intense computations.
+- Big Data
+    The problem can no longer fit in a reasonable amount of memory or you project that it won&#8217;t soon. I&#8217;d say <span class="caps">100GB</span> minimum.  Personally, I would rather use two <span class="caps">EC2</span> <span class="caps">64GB</span> memory instances than manage a Hadoop&nbsp;cluster.</p>
+<p>Unless you can really justify using Hadoop based on two or more of the above qualifications I&#8217;d avoid it, and here&#8217;s why:
+- Hadoop is a pain to manage.
+    Several <span class="caps">XML</span> config files and Java memory settings to deal with and poor documentation to boot.  Elastic MapReduce may be a good option here, but Amazon charges 20% extra to do it for you.
+- Application development is slow.
+    Setting up your development environment is slow and distributed applications are difficult to debug. The Java language also has become persona non grata around many developers now.  APIs for other languages are clunky and built on top of thrift.
+- Java is slow.
+    Java is much faster than it used to be, but it&#8217;s still slow. A well written C or C++ program on a single machine can easily calculate many <span class="caps">CPU</span>-bound problems in the same time it takes a 10-node Hadoop cluster to do&nbsp;so.</p></div>
+</article>
+<div id="share_container">
+<div id="twitter_share">
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="kyteague" data-url="http://kyleteague.com/blog/hadoop-probably-not-right.html" data-text="">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+</div>
+<div id="facebook_like">
+<div class="fb-like" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-href="http://kyleteague.com/blog/hadoop-probably-not-right.html"></div>
+</div>
+<div style="clear: both"></div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kylet';
+    var disqus_identifier = '';
+    var disqus_url = 'http://kyleteague.com/blog/hadoop-probably-not-right.html';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+        <br /><br />
+<div id="creative_commons">
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Kyle Teague</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+</div>
+        <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26360350-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+    </body>
+</html>

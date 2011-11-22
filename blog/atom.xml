@@ -7,7 +7,7 @@
         <link href="http://kyleteague.com/"/>
     
         
-    <updated>2011-10-18T10:14:37Z</updated>
+    <updated>2011-11-22T03:41:55Z</updated>
 
     <id>http://kyleteague.com/blog/atom.xml/</id>
 
@@ -37,5 +37,54 @@ So let&amp;#8217;s say we want to see if you&amp;#8217;ll like song A.  You and 
 &lt;p&gt;Square counting is an effective algorithm in a bipartite graph with a binary rating system. We have ideas on how to leverage square counting for regression (think soft-max) and other graph types, but this is simply the first iteration.  It is essentially a feature extraction stage which transforms the problem from a sparse ratings matrix into a traditional classification problem.  The nice part is you can easily parallelize it, then feed the output into any number of machine learning frameworks, which require far less processing time than would be required for a matrix factorization method.  Using the &lt;a href=&#34;http://cran.r-project.org/web/packages/gbm&#34;&gt;gbm package&lt;/a&gt; in R worked just fine for our use&amp;nbsp;case.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://kddcup.yahoo.com/pdf/Track2-KKTsLearningMachine-Paper.pdf&#34;&gt;Read the paper here&lt;/a&gt; or view the&amp;nbsp;slides:&lt;/p&gt;
 &lt;div style=&#34;width:425px&#34; id=&#34;__ss_9741700&#34;&gt;&lt;strong style=&#34;display:block;margin:12px 0 4px&#34;&gt;&lt;a href=&#34;http://www.slideshare.net/kyleteague1/just-count-the-lovehate-squares&#34; title=&#34;Just Count the Love-Hate Squares&#34;&gt;Just Count the Love-Hate Squares&lt;/a&gt;&lt;/strong&gt;&lt;object id=&#34;__sse9741700&#34; width=&#34;425&#34; height=&#34;355&#34;&gt;&lt;param name=&#34;movie&#34; value=&#34;http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=track2-kktslearningmachine-slides-111018014236-phpapp01&amp;stripped_title=just-count-the-lovehate-squares&amp;userName=kyleteague1&#34; /&gt;&lt;param name=&#34;allowFullScreen&#34; value=&#34;true&#34;/&gt;&lt;param name=&#34;allowScriptAccess&#34; value=&#34;always&#34;/&gt;&lt;embed name=&#34;__sse9741700&#34; src=&#34;http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=track2-kktslearningmachine-slides-111018014236-phpapp01&amp;stripped_title=just-count-the-lovehate-squares&amp;userName=kyleteague1&#34; type=&#34;application/x-shockwave-flash&#34; allowscriptaccess=&#34;always&#34; allowfullscreen=&#34;true&#34; width=&#34;425&#34; height=&#34;355&#34;&gt;&lt;/embed&gt;&lt;/object&gt;&lt;div style=&#34;padding:5px 0 12px&#34;&gt;View more &lt;a href=&#34;http://www.slideshare.net/&#34;&gt;presentations&lt;/a&gt; from &lt;a href=&#34;http://www.slideshare.net/kyleteague1&#34;&gt;Kyle Teague&lt;/a&gt;.&lt;/div&gt;&lt;/div&gt;            </content>
+        </entry>
+            <entry>
+            <title type="html">Modifying Google Sparsehash for the Intel Compiler</title>
+            <author><name>Kyle Teague</name></author>
+            <link href="http://kyleteague.com/blog/modifying-google-sparsehash-intel-compiler.html"/>
+            <updated>2011-03-24T18:00:00Z</updated>
+            <published>2011-03-24T18:00:00Z</published>
+            <id>http://kyleteague.com/blog/modifying-google-sparsehash-intel-compiler.html</id>
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="hash set"
+                        label="Hash Set" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="hash map"
+                        label="Hash Map" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="icc"
+                        label="Icc" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="icpc"
+                        label="Icpc" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="intel"
+                        label="Intel" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="sparse hash"
+                        label="Sparse Hash" />
+            
+            <content type="html">
+                                &lt;p&gt;I recently needed a hash map/set implementation for a C++ project.  No problem I thought.  I went over and grabbed &lt;a href=&#34;http://code.google.com/p/google-sparsehash/&#34;&gt;Google&amp;#8217;s Sparsehash implementation&lt;/a&gt; and I was off and running.  Things came to a screeching halt when I tried to compile my code with the Intel C++ Compiler.  Usually this gives me a 30-40% speed increase for &lt;span class=&#34;caps&#34;&gt;CPU&lt;/span&gt;-bound code, but only if it can actually compile.  After a couple hours of searching and trying various other hash map implementations I realized I was going to have to fix this&amp;nbsp;myself.&lt;/p&gt;
+&lt;p&gt;The problem lies in Sparsehash&amp;#8217;s reliance on the std::tr1 namespace.  This adds lots of neat things like smart pointers and regular expressions, but unfortunately g++&amp;#8217;s implementation is not compatible with &lt;span class=&#34;caps&#34;&gt;ICPC&lt;/span&gt; even when using the compiler flag&amp;nbsp;-std=c++0x.&lt;/p&gt;
+&lt;p&gt;To remove the reliance we&amp;#8217;re going to need to make a couple of changes and unfortunately, these changes will require you to always define your own hash function. First we&amp;#8217;ll need to modify /usr/include/google/sparsehash/sparseconfig.h adding #ifndef __ICC around the bad parts so it looks like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class=&#34;codebox&#34;&gt;&lt;figure class=&#34;code&#34;&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;cp&#34;&gt;/* Namespace for Google classes */&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#define GOOGLE_NAMESPACE ::google&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#ifndef __ICC&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;/* the location of the header defining hash functions */&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#define HASH_FUN_H &amp;lt;tr1/functional&amp;gt;&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;/* the namespace of the hash&amp;lt;&amp;gt; function */&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#define HASH_NAMESPACE std::tr1&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#endif&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;&lt;br /&gt;&lt;figcaption&gt;C++&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;p&gt;and then further&amp;nbsp;down&lt;/p&gt;
+&lt;div class=&#34;codebox&#34;&gt;&lt;figure class=&#34;code&#34;&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;cp&#34;&gt;#ifndef __ICC&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;/* The system-provided hash function including the namespace. */&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#define SPARSEHASH_HASH HASH_NAMESPACE::hash&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#endif&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;&lt;br /&gt;&lt;figcaption&gt;C++&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;p&gt;Then in all the of the following files: sparse_hash_set, sparse_hash_map, dense_hash_set, and dense_hash_map we&amp;#8217;ll make the following&amp;nbsp;changes.&lt;/p&gt;
+&lt;div class=&#34;codebox&#34;&gt;&lt;figure class=&#34;code&#34;&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;cp&#34;&gt;#include HASH_FUN_H &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// defined in config.h&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;&lt;br /&gt;&lt;figcaption&gt;C++&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;p&gt;to&lt;/p&gt;
+&lt;div class=&#34;codebox&#34;&gt;&lt;figure class=&#34;code&#34;&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;cp&#34;&gt;#ifdef HASH_FUN_H&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#include HASH_FUN_H &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// defined in config.h&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#endif&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;&lt;br /&gt;&lt;figcaption&gt;C++&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class=&#34;codebox&#34;&gt;&lt;figure class=&#34;code&#34;&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;HashFcn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SPARSEHASH_HASH&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// defined in sparseconfig.h&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;&lt;br /&gt;&lt;figcaption&gt;C++&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;p&gt;to&lt;/p&gt;
+&lt;div class=&#34;codebox&#34;&gt;&lt;figure class=&#34;code&#34;&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;cp&#34;&gt;#ifdef SPARSEHASH_HASH&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;HashFcn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SPARSEHASH_HASH&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// defined in sparseconfig.h&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#else&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;HashFcn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;cp&#34;&gt;#endif&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;&lt;br /&gt;&lt;figcaption&gt;C++&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;p&gt;And there you go! Google&amp;#8217;s efficient hash map/set implementation for the Intel Compiler. Fortunately the keys for all my hash_maps were integers so I didn&amp;#8217;t really need a hash function, but Intel provides much faster ones in their &lt;span class=&#34;caps&#34;&gt;IPP&lt;/span&gt; Crypto package anyways. Enjoy the performance&amp;nbsp;boost!&lt;/p&gt;            </content>
         </entry>
     </feed>

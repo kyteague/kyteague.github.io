@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Kyleteague.com - Musings on Tech</title>
+        <title>Modifying Google Sparsehash for the Intel Compiler</title>
                 <link rel="stylesheet" href="/media/css/site.css">
         
                 <script src="/media/js/libs/jquery-1.5.1.min.js"></script>
@@ -30,57 +30,7 @@ jQuery(document).ready(function() {
 <a href="http://www.facebook.com/kyleteague" title="Find me on Facebook"><img src="/media/images/Facebook-icon.png" /></a>
 <a href="http://twitter.com/kyteague" title="Follow me on Twitter"><img src="/media/images/Twitter-icon.png" /></a>
 <a href="http://www.linkedin.com/in/kyleteague" title="Find me on LinkedIn"><img src="/media/images/LinkedIn-icon.png" /></a>
-            
-<article>
-<h1 class="title">
-    <a href="/blog/top-10-kdd-cup.html">
-        How We Finished in the Top 10 in the KDD Cup
-    </a>
-</h1>
-<div class="post_time">
-Posted
-<abbr class="timeago" title="2011-10-18T06:51:00Z">
-    Tue, 18 Oct 2011
-</abbr>
-</div>
-<div id="share_container">
-<div id="twitter_share">
-<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="kyteague" data-url="http://kyleteague.com/blog/top-10-kdd-cup.html" data-text="How We Finished in the Top 10 in the KDD Cup">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-</div>
-<div id="facebook_like">
-<div class="fb-like" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-href="http://kyleteague.com/blog/top-10-kdd-cup.html"></div>
-</div>
-<div style="clear: both"></div>
-</div>
-
-
-<div class="post_body">
-<h2>Introduction</h2>
-<p>Earlier this year my colleagues and I participated in both tracks of the <a href="http://kddcup.yahoo.com">Yahoo! <span class="caps">KDD</span> Cup</a>.  To give some background, the <span class="caps">KDD</span> Cup is the biggest annual machine learning competition (at least unpaid).  This year Yahoo! sponsored the event and released a dataset of around 250 million music ratings on genres, artists, albums, and tracks (&#8220;items&#8221;). There were two different tracks in the competition.  Track 1 was concerned with predicting the ratings a user gave on a held-out test set (regression) and Track 2 was focused on predicting whether a user would love or hate a given item (binary&nbsp;classification).</p>
-<p>I ended up leaving the company sponsoring my work early in the competition to join <a href="http://getglue.com">GetGlue</a> as their data scientist, effectively ending my contributions code-wise.  I was around #3 or #4 in Track 1 at the time with a blended matrix factorization algorithm.  It looked at a few temporal and hierarchical features and was solved using a simple gradient descent algorithm with an adaptive learning rate.  It was still good enough for 24th place overall.  I don&#8217;t know the exact number of teams, but I heard unofficially that it topped over 1,000.  My colleague, <a href="http://www.ee.ucla.edu/~jskong">Joseph Kong</a> stayed on and continued to work part time on Track 2 where we (mostly he) <a href="http://kddcup.yahoo.com/leaderboard.php?track=2&amp;n=100">placed 9th</a>.  Unlike other competitors ahead of us though, we did not use an ensemble stack (other than stacking our own algorithm with parameter variations).  The best single method was around 3.7%.  Most of the top <span class="caps">MF</span>-<span class="caps">BPR</span> algorithms could only achieve about what we did on the Test1&nbsp;set.</p>
-<h2>A Primer on Square&nbsp;Counting</h2>
-<p>We differed from most of the competitors due to Joseph coming up with a radical &#8220;square counting&#8221; algorithm.  He was inspired by triangle counting in graph mining.
-<img class="cent" src="/media/images/square_configs.png" alt="Square Configurations" />
-So let&#8217;s say we want to see if you&#8217;ll like song A.  You and a friend both love song B and you and another friend hate song C. The first friend loves A, but the second friend hates it.  The situations with the two friends are modeled in the above figure, specifically in configurations 7 and 0.  Now let&#8217;s expand this to thousands of friends.  We can actually count the configurations for each person/song pair we want to predict reducing each pair into a feature vector of length 2<sup>3</sup>.  The feature vectors can then be passed into your classic classification algorithm of choice.  Of course, there are other subtleties like normalizing the counts based on the degrees of the nodes and other enhancements we made to get down to a 4.6% error rate, but the basic idea is pretty simple. There is also the problem of designing an efficient algorithm to actually do the square counting.  Oh, and if you&#8217;re wondering, our research shows that you&#8217;ll most likely hate song A &#8212; hate is a better&nbsp;predictor.</p>
-<h2>Conclusion</h2>
-<p>Square counting is an effective algorithm in a bipartite graph with a binary rating system. We have ideas on how to leverage square counting for regression (think soft-max) and other graph types, but this is simply the first iteration.  It is essentially a feature extraction stage which transforms the problem from a sparse ratings matrix into a traditional classification problem.  The nice part is you can easily parallelize it, then feed the output into any number of machine learning frameworks, which require far less processing time than would be required for a matrix factorization method.  Using the <a href="http://cran.r-project.org/web/packages/gbm">gbm package</a> in R worked just fine for our use&nbsp;case.</p>
-<p><a href="http://kddcup.yahoo.com/pdf/Track2-KKTsLearningMachine-Paper.pdf">Read the paper here</a> or view the&nbsp;slides:</p>
-<div style="width:425px" id="__ss_9741700"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/kyleteague1/just-count-the-lovehate-squares" title="Just Count the Love-Hate Squares">Just Count the Love-Hate Squares</a></strong><object id="__sse9741700" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=track2-kktslearningmachine-slides-111018014236-phpapp01&stripped_title=just-count-the-lovehate-squares&userName=kyleteague1" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse9741700" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=track2-kktslearningmachine-slides-111018014236-phpapp01&stripped_title=just-count-the-lovehate-squares&userName=kyleteague1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/kyleteague1">Kyle Teague</a>.</div></div>
-</div>
-</article>
-<div id="share_container">
-<div id="twitter_share">
-<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="kyteague" data-url="http://kyleteague.com/blog/top-10-kdd-cup.html" data-text="How We Finished in the Top 10 in the KDD Cup">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-</div>
-<div id="facebook_like">
-<div class="fb-like" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-href="http://kyleteague.com/blog/top-10-kdd-cup.html"></div>
-</div>
-<div style="clear: both"></div>
-</div>
-
-
-<a class="comment_count" data-disqus-identifier="3" href="blog/top-10-kdd-cup.html#disqus_thread">Comments</a>
-<article>
+            <article>
 <h1 class="title">
     <a href="/blog/modifying-google-sparsehash-intel-compiler.html">
         Modifying Google Sparsehash for the Intel Compiler
@@ -124,8 +74,7 @@ Posted
 <p>to</p>
 <div class="codebox"><figure class="code"><div class="highlight"><pre><span class="cp">#ifdef SPARSEHASH_HASH</span><br /><span class="k">class</span> <span class="nc">HashFcn</span> <span class="o">=</span> <span class="n">SPARSEHASH_HASH</span><span class="p">,</span> <span class="c1">// defined in sparseconfig.h</span><br /><span class="cp">#else</span><br /><span class="k">class</span> <span class="nc">HashFcn</span><span class="p">,</span><br /><span class="cp">#endif</span><br /></pre></div><br /><figcaption>C++</figcaption></figure></div>
 
-<p>And there you go! Google&#8217;s efficient hash map/set implementation for the Intel Compiler. Fortunately the keys for all my hash_maps were integers so I didn&#8217;t really need a hash function, but Intel provides much faster ones in their <span class="caps">IPP</span> Crypto package anyways. Enjoy the performance&nbsp;boost!</p>
-</div>
+<p>And there you go! Google&#8217;s efficient hash map/set implementation for the Intel Compiler. Fortunately the keys for all my hash_maps were integers so I didn&#8217;t really need a hash function, but Intel provides much faster ones in their <span class="caps">IPP</span> Crypto package anyways. Enjoy the performance&nbsp;boost!</p></div>
 </article>
 <div id="share_container">
 <div id="twitter_share">
@@ -138,19 +87,20 @@ Posted
 </div>
 
 
-<a class="comment_count" data-disqus-identifier="3" href="blog/modifying-google-sparsehash-intel-compiler.html#disqus_thread">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'kylet';
+    var disqus_identifier = '3';
+    var disqus_url = 'http://kyleteague.com/blog/modifying-google-sparsehash-intel-compiler.html';
 
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
-
-
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
         </div>
         <br /><br />
 <div id="creative_commons">

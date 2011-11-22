@@ -7,7 +7,7 @@
         <link href="http://kyleteague.com/"/>
     
         
-    <updated>2011-10-18T10:14:37Z</updated>
+    <updated>2011-11-22T03:41:55Z</updated>
 
     <id>http://kyleteague.com/blog/excerpts.xml/</id>
 
@@ -24,6 +24,36 @@
                         <category   scheme="http://kyleteague.com/blog/tags"
                         term="square counting"
                         label="Square Counting" />
+            
+            <content type="html">
+                
+                            </content>
+        </entry>
+            <entry>
+            <title type="html">Modifying Google Sparsehash for the Intel Compiler</title>
+            <author><name>Kyle Teague</name></author>
+            <link href="http://kyleteague.com/blog/modifying-google-sparsehash-intel-compiler.html"/>
+            <updated>2011-03-24T18:00:00Z</updated>
+            <published>2011-03-24T18:00:00Z</published>
+            <id>http://kyleteague.com/blog/modifying-google-sparsehash-intel-compiler.html</id>
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="hash set"
+                        label="Hash Set" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="hash map"
+                        label="Hash Map" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="icc"
+                        label="Icc" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="icpc"
+                        label="Icpc" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="intel"
+                        label="Intel" />
+                        <category   scheme="http://kyleteague.com/blog/tags"
+                        term="sparse hash"
+                        label="Sparse Hash" />
             
             <content type="html">
                 

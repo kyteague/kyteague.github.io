@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+                <link rel="stylesheet" href="/media/css/site.css">
+        
+                <script src="/media/js/libs/jquery-1.5.1.min.js"></script>
+        <script src="/media/js/libs/jquery.timeago.js"></script>
+                <script>
+jQuery(document).ready(function() {
+  jQuery("abbr.timeago").timeago();
+});
+        </script>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=290766799313";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+                <div id="container">
+<div id="site_title">
+<h1><a href="/">Musings on Tech</a></h1>
+</div>
+<p>My name is Kyle Teague and I'm the data scientist for <a href="http://getglue.com/kyleteague">GetGlue</a>.  This is my blog.</p>
+<a href="http://feeds.feedburner.com/kyleteague" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/media/images/Feed-icon.png" /></a>
+<a href="http://www.facebook.com/kyleteague" title="Find me on Facebook"><img src="/media/images/Facebook-icon.png" /></a>
+<a href="http://twitter.com/kyteague" title="Follow me on Twitter"><img src="/media/images/Twitter-icon.png" /></a>
+<a href="http://www.linkedin.com/in/kyleteague" title="Find me on LinkedIn"><img src="/media/images/LinkedIn-icon.png" /></a>
+            <article>
+<h1 class="title">
+    <a href="/blog/?p=6">
+        
+    </a>
+</h1>
+<div class="post_time">
+Posted
+<abbr class="timeago" title="2011-10-14T00:00:00Z">
+    Fri, 14 Oct 2011
+</abbr>
+</div>
+<div id="share_container">
+<div id="twitter_share">
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="kyteague" data-url="http://kyleteague.com/blog/?p=6" data-text="">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+</div>
+<div id="facebook_like">
+<div class="fb-like" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-href="http://kyleteague.com/blog/?p=6"></div>
+</div>
+<div style="clear: both"></div>
+</div>
+
+
+<div class="post_body">
+<p>Post has moved to <a href="blog/modifying-google-sparsehash-intel-compiler.html">here</a></p></div>
+</article>
+<div id="share_container">
+<div id="twitter_share">
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="kyteague" data-url="http://kyleteague.com/blog/?p=6" data-text="">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+</div>
+<div id="facebook_like">
+<div class="fb-like" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-href="http://kyleteague.com/blog/?p=6"></div>
+</div>
+<div style="clear: both"></div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kylet';
+    var disqus_identifier = '';
+    var disqus_url = 'http://kyleteague.com/blog/?p=6';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+        <br /><br />
+<div id="creative_commons">
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Kyle Teague</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+</div>
+        <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26360350-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+    </body>
+</html>
