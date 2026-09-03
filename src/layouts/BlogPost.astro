@@ -8,94 +8,223 @@ import Header from "../components/Header.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags } =
+  Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-		</style>
-	</head>
+  <head>
+    <BaseHead title={title} description={description} image={heroImage} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <article>
+        <header class="site-shell pt-12 sm:pt-16">
+          <div class="mx-auto max-w-3xl px-4 sm:px-6">
+            <div
+              class="font-mono text-[0.68rem] tracking-[0.1em] text-muted uppercase"
+            >
+              Published <FormattedDate date={pubDate} />
+            </div>
+            <h1
+              class="mt-5 max-w-[20ch] text-balance text-[clamp(2.5rem,5vw,4.75rem)] font-normal leading-[1.06] text-paper"
+            >
+              {title}<span class="text-phosphor">.</span>
+            </h1>
+            <p
+              class="mt-6 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl"
+            >
+              {description}
+            </p>
+            {
+              tags && (
+                <div class="mt-7 flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <span class="border border-phosphor/20 px-2 py-1 font-mono text-[0.62rem] tracking-[0.08em] text-muted uppercase">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )
+            }
+          </div>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{
-						heroImage && (
-							<Image
-								width={1020}
-								height={510}
-								src={heroImage}
-								alt=""
-							/>
-						)
-					}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-					<script
-						src="https://giscus.app/client.js"
-						data-repo="kyteague/kyteague.github.io"
-						data-repo-id="MDEwOlJlcG9zaXRvcnkyNTcyMzU4"
-						data-category="Blog post"
-						data-category-id="DIC_kwDOACdARs4DEzhD"
-						data-mapping="pathname"
-						data-strict="0"
-						data-reactions-enabled="1"
-						data-emit-metadata="0"
-						data-input-position="top"
-						data-theme="preferred_color_scheme"
-						data-lang="en"
-						crossorigin="anonymous"
-						async
-					></script>
-				</div>
-			</article>
-			<Footer />
-		</main>
-	</body>
+          {
+            heroImage && (
+              <div class="terminal-border relative mt-10 h-[clamp(13rem,38vw,30rem)] w-full overflow-hidden bg-panel sm:mt-12">
+                <Image
+                  src={heroImage}
+                  width={1440}
+                  height={720}
+                  alt=""
+                  class="size-full object-cover opacity-85"
+                />
+                <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-phosphor/15" />
+              </div>
+            )
+          }
+        </header>
+
+        <div
+          class="prose-content site-shell mx-auto max-w-3xl px-4 pt-8 pb-14 sm:px-6 sm:pt-10 sm:pb-20"
+        >
+          <slot />
+          {
+            updatedDate && (
+              <footer class="mt-14 text-right font-mono text-[0.68rem] tracking-[0.08em] text-muted/70 uppercase">
+                Last updated <FormattedDate date={updatedDate} />
+              </footer>
+            )
+          }
+          <div class="mt-14">
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="kyteague/kyteague.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkyNTcyMzU4"
+              data-category="Blog post"
+              data-category-id="DIC_kwDOACdARs4DEzhD"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="dark_dimmed"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+          </div>
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
 </html>
+
+<style>
+  .prose-content {
+    color: #cdd3cb;
+    font-size: 1.12rem;
+    line-height: 1.82;
+  }
+
+  .prose-content :global(h2),
+  .prose-content :global(h3),
+  .prose-content :global(h4) {
+    color: var(--color-paper);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  .prose-content :global(h2) {
+    margin: 3.25rem 0 1.25rem;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+  }
+
+  :global(.prose-content > h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose-content :global(h3) {
+    margin: 2.5rem 0 1rem;
+    font-size: 1.5rem;
+  }
+
+  .prose-content :global(p),
+  .prose-content :global(ul),
+  .prose-content :global(ol),
+  .prose-content :global(blockquote),
+  .prose-content :global(pre) {
+    margin: 0 0 1.65rem;
+  }
+
+  .prose-content :global(ul),
+  .prose-content :global(ol) {
+    padding-left: 1.5rem;
+  }
+
+  .prose-content :global(li) {
+    margin: 0.45rem 0;
+    padding-left: 0.25rem;
+  }
+
+  .prose-content :global(li)::marker {
+    color: var(--color-phosphor);
+  }
+
+  .prose-content :global(a) {
+    color: var(--color-phosphor);
+    text-decoration-color: rgb(164 201 111 / 40%);
+    text-underline-offset: 0.2em;
+  }
+
+  .prose-content :global(a:hover) {
+    color: var(--color-phosphor-bright);
+    text-decoration-color: currentColor;
+  }
+
+  .prose-content :global(a[href^="http"]::after) {
+    margin-left: 0.18em;
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    text-decoration: none;
+    content: "↗";
+  }
+
+  .prose-content :global(strong) {
+    color: var(--color-paper);
+    font-weight: 700;
+  }
+
+  .prose-content :global(blockquote) {
+    border-left: 2px solid var(--color-amber);
+    padding: 0.4rem 0 0.4rem 1.4rem;
+    color: var(--color-muted);
+    font-style: italic;
+  }
+
+  .prose-content :global(code) {
+    border: 1px solid rgb(164 201 111 / 15%);
+    background: var(--color-panel-raised);
+    padding: 0.12rem 0.35rem;
+    color: var(--color-phosphor-bright);
+    font-size: 0.86em;
+  }
+
+  .prose-content :global(pre) {
+    overflow-x: auto;
+    border: 1px solid rgb(164 201 111 / 24%);
+    background: #050806 !important;
+    padding: 1.25rem;
+    box-shadow: inset 3px 0 0 rgb(164 201 111 / 45%);
+    font-size: 0.86rem;
+    line-height: 1.7;
+  }
+
+  .prose-content :global(pre code) {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: inherit;
+  }
+
+  .prose-content :global(img) {
+    margin: 2.5rem auto;
+    border: 1px solid rgb(164 201 111 / 20%);
+    background: var(--color-panel);
+  }
+
+  .prose-content :global(hr) {
+    margin: 3rem 0;
+    border: 0;
+    border-top: 1px solid rgb(164 201 111 / 20%);
+  }
+
+  @media (max-width: 640px) {
+    .prose-content {
+      font-size: 1.02rem;
+    }
+  }
+</style>

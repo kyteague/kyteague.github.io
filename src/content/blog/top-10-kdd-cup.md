@@ -6,7 +6,7 @@ updatedDate: '2026-09-03'
 tags:
   - kdd
   - square counting
-heroImage: '../../assets/kdd-cup-square-counting.webp'
+heroImage: '../../assets/kdd-cup-square-counting-v2.png'
 ---
 
 ## Introduction

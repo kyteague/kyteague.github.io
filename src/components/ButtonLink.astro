@@ -1,0 +1,55 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a"> & {
+  href: string;
+  indicator?: "arrow" | "cursor";
+  variant?: "primary" | "secondary";
+};
+
+const {
+  href,
+  indicator = "arrow",
+  variant = "primary",
+  class: className,
+  ...props
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "group inline-flex min-h-14 items-center justify-center gap-3 border px-7 py-3 font-mono text-base font-semibold tracking-[0.02em] no-underline transition duration-200",
+    {
+      "border-transparent bg-phosphor text-ink shadow-[0_0_24px_rgba(164,201,111,0.1)] hover:border-transparent hover:bg-phosphor-bright":
+        variant === "primary",
+      "border-phosphor/30 bg-transparent text-phosphor hover:border-phosphor/70 hover:bg-phosphor/5":
+        variant === "secondary",
+    },
+    className,
+  ]}
+  {...props}
+>
+  <span><slot /></span>
+  {
+    indicator === "cursor" ? (
+      <span
+        class="terminal-cursor inline-block h-[1.05em] w-2.5 bg-current"
+        aria-hidden="true"
+      />
+    ) : (
+      <svg
+        class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+        viewBox="0 0 20 20"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M4 10h11M11 5l5 5-5 5"
+          stroke="currentColor"
+          stroke-width="1.8"
+        />
+      </svg>
+    )
+  }
+</a>

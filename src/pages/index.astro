@@ -1,47 +1,31 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import WritingList from "../components/WritingList.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
-const latestPost = (
-	await getCollection("blog", ({ data }) => !data.draft)
-).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			{
-				latestPost && (
-					<article>
-						<a href={`/blog/${latestPost.id}/`}>
-							{latestPost.data.heroImage && (
-								<Image
-									width={720}
-									height={360}
-									src={latestPost.data.heroImage}
-									alt=""
-								/>
-							)}
-							<h2>{latestPost.data.title}</h2>
-							<p>
-								<FormattedDate date={latestPost.data.pubDate} />
-							</p>
-							<p>{latestPost.data.description}</p>
-						</a>
-					</article>
-				)
-			}
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead
+      title={`${SITE_TITLE} — Software Engineer & Fractional CTO`}
+      description={SITE_DESCRIPTION}
+    />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <Hero />
+      <WritingList posts={posts} />
+    </main>
+    <Footer />
+  </body>
 </html>

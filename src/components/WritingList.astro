@@ -1,0 +1,109 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+  heading?: string;
+  showAllLink?: boolean;
+}
+
+const { posts, heading = "Selected writing" } = Astro.props;
+const [featuredPost, ...remainingPosts] = posts;
+---
+
+<section class="site-shell py-6" aria-labelledby="writing-heading">
+  <h2
+    id="writing-heading"
+    class="mb-2 font-mono text-lg font-normal tracking-[0.015em] text-phosphor sm:text-xl"
+  >
+    <span class="mr-3" aria-hidden="true">&gt;</span>{heading}
+  </h2>
+
+  {
+    featuredPost ? (
+      <div class="grid gap-2">
+        <a
+          href={`/blog/${featuredPost.id}/`}
+          class="group terminal-border grid overflow-hidden bg-panel/35 no-underline transition duration-200 hover:border-phosphor/65 hover:bg-panel/70 sm:h-[8.75rem] sm:grid-cols-[24.5rem_minmax(0,1fr)]"
+        >
+          <div class="relative min-h-48 overflow-hidden border-b border-phosphor/20 sm:min-h-0 sm:border-r sm:border-b-0">
+            {featuredPost.data.heroImage ? (
+              <Image
+                src={featuredPost.data.heroImage}
+                alt=""
+                width={720}
+                height={360}
+                class="absolute inset-0 size-full object-cover opacity-60 grayscale transition duration-300 group-hover:opacity-78 group-hover:grayscale-0"
+              />
+            ) : (
+              <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(164,201,111,0.12),transparent)]" />
+            )}
+            <div class="absolute inset-0 bg-ink/15" />
+          </div>
+
+          <div class="flex min-w-0 items-center justify-between gap-6 px-6 py-5 sm:px-8">
+            <div class="min-w-0">
+              <h3 class="text-xl font-bold leading-tight tracking-tight text-paper transition group-hover:text-phosphor sm:text-[1.7rem]">
+                {featuredPost.data.title}
+              </h3>
+              <p class="mt-2 line-clamp-2 text-base leading-relaxed text-muted sm:text-lg">
+                {featuredPost.data.description}
+              </p>
+            </div>
+            <svg
+              class="size-7 shrink-0 text-phosphor transition-transform duration-200 group-hover:translate-x-1"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+          </div>
+        </a>
+
+        {remainingPosts.map((post) => (
+          <a
+            href={`/blog/${post.id}/`}
+            class="group terminal-border grid min-h-16 grid-cols-[2.25rem_minmax(0,1fr)_auto] items-center gap-3 bg-panel/20 px-4 py-3 no-underline transition duration-200 hover:border-phosphor/60 hover:bg-phosphor/[0.035] sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:px-7"
+          >
+            <span
+              class="font-mono text-lg tracking-[0.12em] text-phosphor"
+              aria-hidden="true"
+            >
+              ::
+            </span>
+            <div class="min-w-0">
+              <h3 class="line-clamp-2 font-mono text-sm font-normal leading-snug tracking-[0.01em] text-phosphor transition group-hover:text-phosphor-bright sm:text-base">
+                {post.data.title}
+              </h3>
+              <p class="mt-1 font-mono text-[0.62rem] tracking-[0.06em] text-muted uppercase sm:hidden">
+                <FormattedDate date={post.data.pubDate} />
+              </p>
+            </div>
+            <div class="flex items-center gap-5">
+              <span class="hidden font-mono text-[0.68rem] tracking-[0.06em] text-muted uppercase sm:inline">
+                <FormattedDate date={post.data.pubDate} />
+              </span>
+              <span
+                class="font-mono text-xl text-phosphor transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p class="terminal-border bg-panel/40 p-6 font-mono text-sm text-muted">
+        No published entries found.
+      </p>
+    )
+  }
+</section>
