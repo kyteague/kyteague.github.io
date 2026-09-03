@@ -1,15 +1,15 @@
 ---
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
-const latestPost = (await getCollection('blog', ({ data }) => !data.draft)).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-)[0];
+const latestPost = (
+	await getCollection("blog", ({ data }) => !data.draft)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
 ---
 
 <!doctype html>
@@ -33,7 +33,9 @@ const latestPost = (await getCollection('blog', ({ data }) => !data.draft)).sort
 								/>
 							)}
 							<h2>{latestPost.data.title}</h2>
-							<p><FormattedDate date={latestPost.data.pubDate} /></p>
+							<p>
+								<FormattedDate date={latestPost.data.pubDate} />
+							</p>
 							<p>{latestPost.data.description}</p>
 						</a>
 					</article>
