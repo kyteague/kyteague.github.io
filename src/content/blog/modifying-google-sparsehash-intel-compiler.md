@@ -2,6 +2,7 @@
 title: 'Modifying Google Sparsehash for the Intel Compiler'
 description: 'A small compatibility patch for using Google Sparsehash with the Intel C++ Compiler.'
 pubDate: '2011-03-24T18:00:00Z'
+updatedDate: '2026-09-03'
 tags:
   - hash set
   - hash map
@@ -12,7 +13,7 @@ tags:
 heroImage: '../../assets/sparsehash-compiler-compatibility.webp'
 ---
 
-I recently needed a hash map/set implementation for a C++ project. No problem I thought. I went over and grabbed [Google's Sparsehash implementation](http://code.google.com/p/google-sparsehash/) and I was off and running. Things came to a screeching halt when I tried to compile my code with the Intel C++ Compiler. Usually this gives me a 30–40% speed increase for CPU-bound code, but only if it can actually compile. After a couple hours of searching and trying various other hash map implementations I realized I was going to have to fix this myself.
+I recently needed a hash map/set implementation for a C++ project. No problem I thought. I went over and grabbed [Google's Sparsehash implementation](https://github.com/sparsehash/sparsehash) and I was off and running. Things came to a screeching halt when I tried to compile my code with the Intel C++ Compiler. Usually this gives me a 30–40% speed increase for CPU-bound code, but only if it can actually compile. After a couple hours of searching and trying various other hash map implementations I realized I was going to have to fix this myself.
 
 The problem lies in Sparsehash's reliance on the `std::tr1` namespace. This adds lots of neat things like smart pointers and regular expressions, but unfortunately g++'s implementation is not compatible with ICPC even when using the compiler flag `-std=c++0x`.
 
