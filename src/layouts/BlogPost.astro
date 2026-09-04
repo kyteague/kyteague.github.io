@@ -96,7 +96,9 @@ const blogPostingSchema = {
                 src={heroImage}
                 width={1440}
                 height={720}
-                alt=""
+                alt={title}
+                loading="eager"
+                fetchpriority="high"
                 class="size-full object-cover opacity-85"
               />
               <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-phosphor/15" />

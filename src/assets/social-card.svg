@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0v48" fill="none" stroke="#a4c96f" stroke-opacity=".07" />
+    </pattern>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a4c96f" stop-opacity=".14" />
+      <stop offset=".7" stop-color="#a4c96f" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b0f0d" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+  <rect x="48" y="48" width="1104" height="534" rx="2" fill="none" stroke="#a4c96f" stroke-opacity=".45" stroke-width="2" />
+  <path d="M48 128h1104" stroke="#a4c96f" stroke-opacity=".22" />
+  <circle cx="86" cy="88" r="7" fill="#a4c96f" />
+  <circle cx="112" cy="88" r="7" fill="#a4c96f" fill-opacity=".45" />
+  <circle cx="138" cy="88" r="7" fill="#a4c96f" fill-opacity=".2" />
+  <text x="88" y="320" fill="#f0f2ed" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="80" font-weight="700" letter-spacing="-3">Kyle Teague<tspan fill="#a4c96f">.</tspan></text>
+  <text x="92" y="382" fill="#a4c96f" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" letter-spacing="4">SOFTWARE ENGINEER / FRACTIONAL CTO</text>
+  <text x="92" y="532" fill="#8c978d" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21" letter-spacing="2">KYLETEAGUE.COM</text>
+</svg>

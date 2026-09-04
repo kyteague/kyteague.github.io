@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import WritingList from "../../components/WritingList.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { BLOG_DESCRIPTION, SITE_TITLE } from "../../consts";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
@@ -9,7 +9,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 );
 ---
 
-<BaseLayout title={`Writing — ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
+<BaseLayout title={`Writing — ${SITE_TITLE}`} description={BLOG_DESCRIPTION}>
   <main>
     <section
       class="site-shell border-b border-phosphor/20 pt-16 pb-12 sm:pt-20 sm:pb-16"
@@ -23,8 +23,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
         >
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-        Writing on software systems, data, engineering leadership, and the
-        decisions behind durable technology.
+        {BLOG_DESCRIPTION}
       </p>
     </section>
     <WritingList posts={posts} showAllLink={false} heading="All entries" />

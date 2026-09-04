@@ -4,6 +4,8 @@
 export const SITE_TITLE = "Kyle Teague";
 export const SITE_DESCRIPTION =
   "Software engineer and fractional CTO helping teams build durable systems and make clear technology decisions.";
+export const BLOG_DESCRIPTION =
+  "Writing on software systems, data, engineering leadership, and the decisions behind durable technology.";
 export const SITE_AUTHOR = "Kyle Teague";
 export const SITE_TWITTER = "@kyteague";
 export const SITE_AUTHOR_PROFILES = [
