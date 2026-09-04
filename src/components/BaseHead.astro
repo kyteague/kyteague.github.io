@@ -21,9 +21,10 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const markdownPath = Astro.url.pathname.endsWith("/")
-  ? `${Astro.url.pathname}index.md`
-  : `${Astro.url.pathname}.md`;
+const markdownPath =
+  Astro.url.pathname === "/"
+    ? "/index.md"
+    : `${Astro.url.pathname.replace(/\/$/, "")}.md`;
 const markdownURL = new URL(markdownPath, Astro.site);
 const llmsURL = new URL("/llms.txt", Astro.site);
 

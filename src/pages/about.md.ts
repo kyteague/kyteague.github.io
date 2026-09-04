@@ -5,7 +5,7 @@ import {
   SITE_AUTHOR_BIO,
   SITE_AUTHOR_PROFILES,
   SITE_TOPICS,
-} from "../../consts";
+} from "../consts";
 
 export const GET: APIRoute = async ({ site }) => {
   if (!site) throw new Error("The Astro site URL is required");
@@ -29,7 +29,7 @@ In 2011, Kyle's team placed ninth in the Yahoo! KDD Cup using a graph-based "squ
 ${posts
   .map(
     (post) =>
-      `- [${post.data.title}](${absolute(`/blog/${post.id}/index.md`)}): ${post.data.description}`,
+      `- [${post.data.title}](${absolute(`/blog/${post.id}.md`)}): ${post.data.description}`,
   )
   .join("\n")}
 

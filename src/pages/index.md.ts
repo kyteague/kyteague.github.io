@@ -32,7 +32,7 @@ ${SITE_AUTHOR_PROFILES.map((profile) => `- ${profile}`).join("\n")}
 ${posts
   .map(
     (post) =>
-      `- [${post.data.title}](${absolute(`/blog/${post.id}/index.md`)}): ${post.data.description}`,
+      `- [${post.data.title}](${absolute(`/blog/${post.id}.md`)}): ${post.data.description}`,
   )
   .join("\n")}
 

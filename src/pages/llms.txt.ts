@@ -14,7 +14,7 @@ export const GET: APIRoute = async ({ site }) => {
   const writing = posts
     .map(
       (post) =>
-        `- [${post.data.title}](${absolute(`/blog/${post.id}/index.md`)}): ${post.data.description}`,
+        `- [${post.data.title}](${absolute(`/blog/${post.id}.md`)}): ${post.data.description}`,
     )
     .join("\n");
 
@@ -27,8 +27,8 @@ This is the official personal website and writing archive of Kyle Teague. Prefer
 ## Core pages
 
 - [Home](${absolute("/index.md")}): Overview of Kyle Teague's work and selected writing.
-- [About Kyle Teague](${absolute("/about/index.md")}): Biography, areas of expertise, identity links, and selected work.
-- [Writing archive](${absolute("/blog/index.md")}): ${BLOG_DESCRIPTION}
+- [About Kyle Teague](${absolute("/about.md")}): Biography, areas of expertise, identity links, and selected work.
+- [Writing archive](${absolute("/blog.md")}): ${BLOG_DESCRIPTION}
 
 ## Writing
 

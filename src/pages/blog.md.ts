@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
-import { BLOG_DESCRIPTION, SITE_AUTHOR } from "../../consts";
+import { BLOG_DESCRIPTION, SITE_AUTHOR } from "../consts";
 
 export const GET: APIRoute = async ({ site }) => {
   if (!site) throw new Error("The Astro site URL is required");
@@ -17,7 +17,7 @@ export const GET: APIRoute = async ({ site }) => {
 ${posts
   .map(
     (post) =>
-      `- [${post.data.title}](${absolute(`/blog/${post.id}/index.md`)}): ${post.data.description} Published ${post.data.pubDate.toISOString().slice(0, 10)}.`,
+      `- [${post.data.title}](${absolute(`/blog/${post.id}.md`)}): ${post.data.description} Published ${post.data.pubDate.toISOString().slice(0, 10)}.`,
   )
   .join("\n")}
 

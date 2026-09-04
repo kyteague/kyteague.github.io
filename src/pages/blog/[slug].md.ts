@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import type { APIRoute, GetStaticPaths } from "astro";
-import { SITE_AUTHOR } from "../../../consts";
+import { SITE_AUTHOR } from "../../consts";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
