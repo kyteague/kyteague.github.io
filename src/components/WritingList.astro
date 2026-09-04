@@ -35,6 +35,8 @@ const [featuredPost, ...remainingPosts] = posts;
                 alt=""
                 width={720}
                 height={360}
+                loading="eager"
+                fetchpriority="high"
                 class="absolute inset-0 size-full object-cover opacity-60 grayscale transition duration-300 group-hover:opacity-78 group-hover:grayscale-0"
               />
             ) : (
