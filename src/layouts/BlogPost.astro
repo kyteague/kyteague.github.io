@@ -2,7 +2,8 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
-import { SITE_AUTHOR, SITE_TWITTER } from "../consts";
+import StructuredData from "../components/StructuredData.astro";
+import { SITE_AUTHOR, SITE_AUTHOR_PROFILES, SITE_TWITTER } from "../consts";
 import BaseLayout from "./BaseLayout.astro";
 
 type Props = CollectionEntry<"blog">["data"];
@@ -11,11 +12,13 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
   Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const authorURL = new URL("/", Astro.site).href;
+const personID = new URL("/#person", Astro.site).href;
+const websiteID = new URL("/#website", Astro.site).href;
 const imageURL = heroImage
   ? new URL(heroImage.src, Astro.site).href
   : undefined;
 
-const serializedBlogPostingSchema = JSON.stringify({
+const blogPostingSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: title,
@@ -29,12 +32,16 @@ const serializedBlogPostingSchema = JSON.stringify({
   dateModified: (updatedDate ?? pubDate).toISOString(),
   author: {
     "@type": "Person",
+    "@id": personID,
     name: SITE_AUTHOR,
     url: authorURL,
+    sameAs: SITE_AUTHOR_PROFILES,
   },
+  publisher: { "@id": personID },
+  isPartOf: { "@id": websiteID },
   image: imageURL ? [imageURL] : undefined,
   keywords: tags?.length ? tags : undefined,
-}).replace(/</g, "\\u003c");
+};
 ---
 
 <BaseLayout
@@ -49,9 +56,7 @@ const serializedBlogPostingSchema = JSON.stringify({
   tags={tags}
   twitterCreator={SITE_TWITTER}
 >
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={serializedBlogPostingSchema} />
-  </Fragment>
+  <StructuredData slot="head" data={blogPostingSchema} />
   <main>
     <article>
       <header class="site-shell pt-12 sm:pt-16">

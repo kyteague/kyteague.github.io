@@ -1,19 +1,54 @@
 ---
 import { getCollection } from "astro:content";
 import Hero from "../components/Hero.astro";
+import StructuredData from "../components/StructuredData.astro";
 import WritingList from "../components/WritingList.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import {
+  SITE_AUTHOR,
+  SITE_AUTHOR_PROFILES,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+} from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const siteURL = new URL("/", Astro.site).href;
+const websiteID = new URL("/#website", Astro.site).href;
+const personID = new URL("/#person", Astro.site).href;
+const siteSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": websiteID,
+      url: siteURL,
+      name: SITE_TITLE,
+      alternateName: "kyleteague.com",
+      description: SITE_DESCRIPTION,
+      inLanguage: "en-US",
+      creator: { "@id": personID },
+      publisher: { "@id": personID },
+    },
+    {
+      "@type": "Person",
+      "@id": personID,
+      name: SITE_AUTHOR,
+      url: siteURL,
+      description: SITE_DESCRIPTION,
+      sameAs: SITE_AUTHOR_PROFILES,
+    },
+  ],
+};
 ---
 
 <BaseLayout
   title={`${SITE_TITLE} — Software Engineer & Fractional CTO`}
   description={SITE_DESCRIPTION}
 >
+  <StructuredData slot="head" data={siteSchema} />
   <main>
     <Hero />
     <WritingList posts={posts} />

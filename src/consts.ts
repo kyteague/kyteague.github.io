@@ -6,3 +6,8 @@ export const SITE_DESCRIPTION =
   "Software engineer and fractional CTO helping teams build durable systems and make clear technology decisions.";
 export const SITE_AUTHOR = "Kyle Teague";
 export const SITE_TWITTER = "@kyteague";
+export const SITE_AUTHOR_PROFILES = [
+  "https://github.com/kyteague",
+  "https://twitter.com/kyteague",
+  "https://www.linkedin.com/in/kyleteague",
+];
