@@ -19,6 +19,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 );
 
 const siteURL = new URL("/", Astro.site).href;
+const profileURL = new URL("/about/", Astro.site).href;
 const websiteID = new URL("/#website", Astro.site).href;
 const personID = new URL("/#person", Astro.site).href;
 const siteSchema = {
@@ -39,7 +40,7 @@ const siteSchema = {
       "@type": "Person",
       "@id": personID,
       name: SITE_AUTHOR,
-      url: siteURL,
+      url: profileURL,
       description: SITE_AUTHOR_BIO,
       jobTitle: SITE_AUTHOR_ROLE,
       knowsAbout: SITE_TOPICS,

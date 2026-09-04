@@ -11,6 +11,7 @@ tags:
   - intel
   - sparse hash
 heroImage: "../../assets/sparsehash-compiler-compatibility.webp"
+heroImageAlt: "Two incompatible data structures connected through a compiler compatibility layer"
 ---
 
 I recently needed a hash map/set implementation for a C++ project. No problem I thought. I went over and grabbed [Google's Sparsehash implementation](https://github.com/sparsehash/sparsehash) and I was off and running. Things came to a screeching halt when I tried to compile my code with the Intel C++ Compiler. Usually this gives me a 30–40% speed increase for CPU-bound code, but only if it can actually compile. After a couple hours of searching and trying various other hash map implementations I realized I was going to have to fix this myself.

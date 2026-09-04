@@ -10,6 +10,8 @@ export const SITE_AUTHOR = "Kyle Teague";
 export const SITE_AUTHOR_ROLE = "Software engineer and fractional CTO";
 export const SITE_AUTHOR_BIO =
   "Kyle Teague designs software systems, leads technical teams, and helps companies make difficult technology decisions.";
+export const SITE_SOCIAL_IMAGE_ALT =
+  "Kyle Teague, software engineer and fractional CTO";
 export const SITE_TWITTER = "@kyteague";
 export const SITE_TOPICS = [
   "Software architecture",

@@ -14,10 +14,17 @@ import BaseLayout from "./BaseLayout.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage, tags } =
-  Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  heroImageAlt,
+  tags,
+} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const authorURL = new URL("/", Astro.site).href;
+const authorURL = new URL("/about/", Astro.site).href;
 const personID = new URL("/#person", Astro.site).href;
 const websiteID = new URL("/#website", Astro.site).href;
 const imageURL = heroImage
@@ -27,6 +34,7 @@ const imageURL = heroImage
 const blogPostingSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "@id": `${canonicalURL.href}#article`,
   headline: title,
   description,
   url: canonicalURL.href,
@@ -47,7 +55,15 @@ const blogPostingSchema = {
   },
   publisher: { "@id": personID },
   isPartOf: { "@id": websiteID },
-  image: imageURL ? [imageURL] : undefined,
+  image: imageURL
+    ? {
+        "@type": "ImageObject",
+        url: imageURL,
+        width: heroImage?.width,
+        height: heroImage?.height,
+        caption: heroImageAlt,
+      }
+    : undefined,
   keywords: tags?.length ? tags : undefined,
   inLanguage: "en-US",
   isAccessibleForFree: true,
@@ -58,7 +74,7 @@ const blogPostingSchema = {
   title={title}
   description={description}
   image={heroImage}
-  imageAlt={title}
+  imageAlt={heroImageAlt}
   openGraphType="article"
   publishedTime={pubDate}
   modifiedTime={updatedDate}
@@ -108,7 +124,7 @@ const blogPostingSchema = {
                 src={heroImage}
                 width={1440}
                 height={720}
-                alt={title}
+                alt={heroImageAlt ?? title}
                 loading="eager"
                 fetchpriority="high"
                 class="size-full object-cover opacity-85"

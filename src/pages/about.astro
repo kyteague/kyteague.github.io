@@ -15,7 +15,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 );
 const pageURL = new URL("/about/", Astro.site).href;
 const personID = new URL("/#person", Astro.site).href;
-const personURL = new URL("/", Astro.site).href;
 const profileSchema = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
@@ -24,11 +23,12 @@ const profileSchema = {
   name: `About ${SITE_AUTHOR}`,
   description: SITE_AUTHOR_BIO,
   inLanguage: "en-US",
+  isPartOf: { "@id": new URL("/#website", Astro.site).href },
   mainEntity: {
     "@type": "Person",
     "@id": personID,
     name: SITE_AUTHOR,
-    url: personURL,
+    url: pageURL,
     description: SITE_AUTHOR_BIO,
     jobTitle: SITE_AUTHOR_ROLE,
     knowsAbout: SITE_TOPICS,

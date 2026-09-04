@@ -7,6 +7,7 @@ tags:
   - kdd
   - square counting
 heroImage: "../../assets/kdd-cup-square-counting-v2.png"
+heroImageAlt: "A bipartite recommendation graph with highlighted square patterns feeding ranked predictions"
 ---
 
 ## Introduction
@@ -19,7 +20,7 @@ I ended up leaving the company sponsoring my work early in the competition to jo
 
 We differed from most of the competitors due to Joseph coming up with a radical “square counting” algorithm. He was inspired by triangle counting in graph mining.
 
-![Square configurations](../../assets/square-configs.png)
+![Eight signed square configurations between two users and two items](../../assets/square-configs.png)
 
 So let's say we want to see if you'll like song A. You and a friend both love song B and you and another friend hate song C. The first friend loves A, but the second friend hates it. The situations with the two friends are modeled in the above figure, specifically in configurations 7 and 0. Now let's expand this to thousands of friends. We can actually count the configurations for each person/song pair we want to predict reducing each pair into a feature vector of length 2<sup>3</sup>. The feature vectors can then be passed into your classic classification algorithm of choice. Of course, there are other subtleties like normalizing the counts based on the degrees of the nodes and other enhancements we made to get down to a 4.6% error rate, but the basic idea is pretty simple. There is also the problem of designing an efficient algorithm to actually do the square counting. Oh, and if you're wondering, our research shows that you'll most likely hate song A—hate is a better predictor.
 
