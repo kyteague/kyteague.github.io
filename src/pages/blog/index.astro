@@ -4,10 +4,12 @@ import StructuredData from "../../components/StructuredData.astro";
 import WritingList from "../../components/WritingList.astro";
 import { BLOG_DESCRIPTION, SITE_AUTHOR, SITE_TITLE } from "../../consts";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getBlogTags } from "../../utils/blogTags";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+const tags = getBlogTags(posts);
 const pageURL = new URL("/blog/", Astro.site).href;
 const collectionSchema = {
   "@context": "https://schema.org",
@@ -48,6 +50,12 @@ const collectionSchema = {
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
         {BLOG_DESCRIPTION}
       </p>
+      <a
+        href="/blog/tags/"
+        class="mt-6 inline-flex items-center gap-2 font-mono text-sm text-phosphor no-underline transition-colors hover:text-paper"
+      >
+        Browse {tags.length} topics <span aria-hidden="true">→</span>
+      </a>
     </section>
     <WritingList posts={posts} showAllLink={false} heading="All entries" />
   </main>

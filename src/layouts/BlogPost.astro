@@ -11,6 +11,7 @@ import {
   SITE_TOPICS,
   SITE_TWITTER,
 } from "../consts";
+import { getBlogTagSlug } from "../utils/blogTags";
 import BaseLayout from "./BaseLayout.astro";
 
 type Props = CollectionEntry<"blog">["data"];
@@ -120,9 +121,13 @@ const blogPostingSchema = {
             tags && (
               <div class="mt-7 flex flex-wrap gap-2">
                 {tags.map((tag) => (
-                  <span class="border border-phosphor/20 px-2 py-1 font-mono text-[0.62rem] tracking-[0.08em] text-muted uppercase">
+                  <a
+                    href={`/blog/tags/${getBlogTagSlug(tag)}/`}
+                    aria-label={`View writing tagged ${tag}`}
+                    class="border border-phosphor/20 px-2 py-1 font-mono text-[0.62rem] tracking-[0.08em] text-muted uppercase no-underline transition-colors hover:border-phosphor/60 hover:text-phosphor"
+                  >
                     {tag}
-                  </span>
+                  </a>
                 ))}
               </div>
             )

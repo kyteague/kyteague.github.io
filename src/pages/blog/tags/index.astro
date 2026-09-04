@@ -1,0 +1,89 @@
+---
+import { getCollection } from "astro:content";
+import StructuredData from "../../../components/StructuredData.astro";
+import { SITE_AUTHOR, SITE_TITLE } from "../../../consts";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getBlogTags } from "../../../utils/blogTags";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const tags = getBlogTags(posts);
+const description = `Browse ${SITE_AUTHOR}'s writing by topic.`;
+const pageURL = new URL("/blog/tags/", Astro.site).href;
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": pageURL,
+  url: pageURL,
+  name: `Writing topics by ${SITE_AUTHOR}`,
+  description,
+  inLanguage: "en-US",
+  isPartOf: { "@id": new URL("/#website", Astro.site).href },
+  author: { "@id": new URL("/#person", Astro.site).href },
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: tags.map((tag, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: new URL(`/blog/tags/${tag.slug}/`, Astro.site).href,
+      name: tag.name,
+    })),
+  },
+};
+---
+
+<BaseLayout title={`Topics — ${SITE_TITLE}`} description={description}>
+  <StructuredData slot="head" data={collectionSchema} />
+  <main>
+    <section
+      class="site-shell border-b border-phosphor/20 pt-16 pb-12 sm:pt-20 sm:pb-16"
+    >
+      <p class="terminal-kicker">Topic index</p>
+      <h1
+        class="mt-4 max-w-[18ch] text-[clamp(2.75rem,5vw,4.75rem)] font-normal leading-[1.08] text-paper"
+      >
+        Browse by topic<span class="text-phosphor">.</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+        {tags.length} topics across {posts.length} published {
+          posts.length === 1 ? "entry" : "entries"
+        }.
+      </p>
+      <a
+        href="/blog/"
+        class="mt-6 inline-flex items-center gap-2 font-mono text-sm text-phosphor no-underline transition-colors hover:text-paper"
+      >
+        <span aria-hidden="true">←</span> All writing
+      </a>
+    </section>
+
+    <section class="site-shell py-6" aria-labelledby="topics-heading">
+      <h2
+        id="topics-heading"
+        class="mb-2 font-mono text-lg font-normal tracking-[0.015em] text-phosphor sm:text-xl"
+      >
+        <span class="mr-3" aria-hidden="true">&gt;</span>All topics
+      </h2>
+      <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          tags.map((tag) => (
+            <a
+              href={`/blog/tags/${tag.slug}/`}
+              class="group terminal-border flex min-h-20 items-center justify-between gap-4 bg-panel/20 px-5 py-4 no-underline transition duration-200 hover:border-phosphor/60 hover:bg-phosphor/[0.035] sm:px-6"
+            >
+              <span class="font-mono text-sm text-phosphor transition-colors group-hover:text-phosphor-bright sm:text-base">
+                <span aria-hidden="true">#</span>
+                {tag.name}
+              </span>
+              <span class="shrink-0 font-mono text-[0.68rem] tracking-[0.06em] text-muted uppercase">
+                {tag.posts.length}{" "}
+                {tag.posts.length === 1 ? "entry" : "entries"}
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</BaseLayout>
