@@ -10,9 +10,9 @@ const today = new Date();
 
 <footer id="contact" class="border-t border-phosphor/20 bg-panel/45">
   <div class="site-shell flex flex-col gap-3 py-8 sm:items-end">
-    <div class="flex gap-2 text-phosphor">
+    <div class="flex items-center gap-6 text-phosphor">
       <a
-        class="inline-flex size-11 items-center justify-center transition-colors hover:bg-phosphor/[0.06] hover:text-paper"
+        class="social-link"
         href="https://github.com/kyteague"
         target="_blank"
         rel="me noreferrer"
@@ -22,7 +22,7 @@ const today = new Date();
         <span class="sr-only">GitHub</span>
       </a>
       <a
-        class="inline-flex size-11 items-center justify-center transition-colors hover:bg-phosphor/[0.06] hover:text-paper"
+        class="social-link"
         href="https://twitter.com/kyteague"
         target="_blank"
         rel="me noreferrer"
@@ -32,7 +32,7 @@ const today = new Date();
         <span class="sr-only">X / Twitter</span>
       </a>
       <a
-        class="inline-flex size-11 items-center justify-center transition-colors hover:bg-phosphor/[0.06] hover:text-paper"
+        class="social-link"
         href="https://www.linkedin.com/in/kyleteague"
         target="_blank"
         rel="me noreferrer"
@@ -47,3 +47,46 @@ const today = new Date();
     </p>
   </div>
 </footer>
+
+<style>
+  .social-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition:
+      color 180ms ease,
+      filter 180ms ease;
+  }
+
+  .social-link::before {
+    content: "";
+    position: absolute;
+    inset: -11px;
+  }
+
+  .social-link :global(svg) {
+    transition: transform 180ms ease;
+  }
+
+  .social-link:is(:hover, :focus-visible) {
+    color: var(--color-phosphor-bright);
+    filter: drop-shadow(0 0 6px var(--color-phosphor));
+  }
+
+  .social-link:is(:hover, :focus-visible) :global(svg) {
+    transform: translateY(-3px) scale(1.08);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .social-link,
+    .social-link :global(svg) {
+      transition: none;
+    }
+
+    .social-link:is(:hover, :focus-visible) :global(svg) {
+      transform: none;
+    }
+  }
+</style>
