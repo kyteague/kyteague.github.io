@@ -5,9 +5,12 @@ import StructuredData from "../components/StructuredData.astro";
 import WritingList from "../components/WritingList.astro";
 import {
   SITE_AUTHOR,
+  SITE_AUTHOR_BIO,
+  SITE_AUTHOR_ROLE,
   SITE_AUTHOR_PROFILES,
   SITE_DESCRIPTION,
   SITE_TITLE,
+  SITE_TOPICS,
 } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -37,7 +40,9 @@ const siteSchema = {
       "@id": personID,
       name: SITE_AUTHOR,
       url: siteURL,
-      description: SITE_DESCRIPTION,
+      description: SITE_AUTHOR_BIO,
+      jobTitle: SITE_AUTHOR_ROLE,
+      knowsAbout: SITE_TOPICS,
       sameAs: SITE_AUTHOR_PROFILES,
     },
   ],

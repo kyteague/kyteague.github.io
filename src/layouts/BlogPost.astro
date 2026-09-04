@@ -3,7 +3,13 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import StructuredData from "../components/StructuredData.astro";
-import { SITE_AUTHOR, SITE_AUTHOR_PROFILES, SITE_TWITTER } from "../consts";
+import {
+  SITE_AUTHOR,
+  SITE_AUTHOR_BIO,
+  SITE_AUTHOR_PROFILES,
+  SITE_AUTHOR_ROLE,
+  SITE_TWITTER,
+} from "../consts";
 import BaseLayout from "./BaseLayout.astro";
 
 type Props = CollectionEntry<"blog">["data"];
@@ -35,12 +41,16 @@ const blogPostingSchema = {
     "@id": personID,
     name: SITE_AUTHOR,
     url: authorURL,
+    description: SITE_AUTHOR_BIO,
+    jobTitle: SITE_AUTHOR_ROLE,
     sameAs: SITE_AUTHOR_PROFILES,
   },
   publisher: { "@id": personID },
   isPartOf: { "@id": websiteID },
   image: imageURL ? [imageURL] : undefined,
   keywords: tags?.length ? tags : undefined,
+  inLanguage: "en-US",
+  isAccessibleForFree: true,
 };
 ---
 
@@ -64,7 +74,9 @@ const blogPostingSchema = {
           <div
             class="font-mono text-[0.68rem] tracking-[0.1em] text-muted uppercase"
           >
-            Published <FormattedDate date={pubDate} />
+            By <a class="text-phosphor hover:text-paper" href="/about/"
+              >{SITE_AUTHOR}</a
+            > · Published <FormattedDate date={pubDate} />
           </div>
           <h1
             class="mt-5 max-w-[20ch] text-balance text-[clamp(2.5rem,5vw,4.75rem)] font-normal leading-[1.06] text-paper"

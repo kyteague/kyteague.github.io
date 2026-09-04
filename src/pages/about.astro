@@ -1,17 +1,119 @@
 ---
+import { getCollection } from "astro:content";
+import StructuredData from "../components/StructuredData.astro";
+import {
+  SITE_AUTHOR,
+  SITE_AUTHOR_BIO,
+  SITE_AUTHOR_PROFILES,
+  SITE_AUTHOR_ROLE,
+  SITE_TOPICS,
+} from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const pageURL = new URL("/about/", Astro.site).href;
+const personID = new URL("/#person", Astro.site).href;
+const personURL = new URL("/", Astro.site).href;
+const profileSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": pageURL,
+  url: pageURL,
+  name: `About ${SITE_AUTHOR}`,
+  description: SITE_AUTHOR_BIO,
+  inLanguage: "en-US",
+  mainEntity: {
+    "@type": "Person",
+    "@id": personID,
+    name: SITE_AUTHOR,
+    url: personURL,
+    description: SITE_AUTHOR_BIO,
+    jobTitle: SITE_AUTHOR_ROLE,
+    knowsAbout: SITE_TOPICS,
+    sameAs: SITE_AUTHOR_PROFILES,
+  },
+};
 ---
 
-<BaseLayout title="About Me" description="About Kyle Teague">
+<BaseLayout
+  title={`About ${SITE_AUTHOR} — ${SITE_AUTHOR_ROLE}`}
+  description={SITE_AUTHOR_BIO}
+>
+  <StructuredData slot="head" data={profileSchema} />
   <main>
     <section class="site-shell py-16 sm:py-20">
       <p class="terminal-kicker">About</p>
       <h1
         class="mt-4 text-[clamp(2.75rem,5vw,4.75rem)] font-normal leading-[1.08] text-paper"
       >
-        About me<span class="text-phosphor">.</span>
+        I’m Kyle Teague<span class="text-phosphor">.</span>
       </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">TODO</p>
+      <div class="mt-6 max-w-3xl space-y-5 text-lg leading-relaxed text-muted">
+        <p>
+          I’m a software engineer and fractional CTO. I design systems, lead
+          technical teams, and help companies make difficult technology
+          decisions.
+        </p>
+        <p>
+          My work and writing span software architecture, distributed systems,
+          data engineering, machine learning, engineering leadership, and
+          technology strategy. I’m most interested in the choices that make
+          software durable: clear constraints, simple interfaces, and systems
+          teams can operate with confidence.
+        </p>
+        <p>
+          In 2011, my team placed ninth in the Yahoo! KDD Cup using a
+          graph-based “square counting” method for recommendation. I publish
+          technical field notes here, including the approach behind that result
+          and practical lessons from building data-intensive systems.
+        </p>
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a
+          class="terminal-border px-4 py-2 font-mono text-sm text-phosphor transition hover:border-phosphor/60 hover:text-paper"
+          href="https://www.linkedin.com/in/kyleteague"
+          target="_blank"
+          rel="me noreferrer">Connect on LinkedIn</a
+        >
+        <a
+          class="terminal-border px-4 py-2 font-mono text-sm text-phosphor transition hover:border-phosphor/60 hover:text-paper"
+          href="/blog/">Read my writing</a
+        >
+      </div>
+    </section>
+
+    <section
+      class="site-shell border-t border-phosphor/20 py-12 sm:py-16"
+      aria-labelledby="selected-work"
+    >
+      <h2
+        id="selected-work"
+        class="font-mono text-lg font-normal tracking-[0.015em] text-phosphor sm:text-xl"
+      >
+        <span class="mr-3" aria-hidden="true">&gt;</span>Selected work
+      </h2>
+      <ul class="mt-6 grid gap-3">
+        {
+          posts.map((post) => (
+            <li>
+              <a
+                class="group terminal-border block bg-panel/20 px-5 py-4 no-underline transition hover:border-phosphor/60 hover:bg-panel/40"
+                href={`/blog/${post.id}/`}
+              >
+                <span class="font-mono text-sm text-phosphor transition group-hover:text-paper">
+                  {post.data.title}
+                </span>
+                <span class="mt-1 block text-sm leading-relaxed text-muted">
+                  {post.data.description}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </section>
   </main>
 </BaseLayout>
