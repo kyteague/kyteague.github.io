@@ -1,12 +1,12 @@
 ---
-title: 'How We Finished in the Top 10 in the KDD Cup'
-description: 'How square counting helped our team place ninth in the 2011 Yahoo! KDD Cup.'
-pubDate: '2011-10-18T06:51:00Z'
-updatedDate: '2026-09-03'
+title: "How We Finished in the Top 10 in the KDD Cup"
+description: "How square counting helped our team place ninth in the 2011 Yahoo! KDD Cup."
+pubDate: "2011-10-18T06:51:00Z"
+updatedDate: "2026-09-03"
 tags:
   - kdd
   - square counting
-heroImage: '../../assets/kdd-cup-square-counting-v2.png'
+heroImage: "../../assets/kdd-cup-square-counting-v2.png"
 ---
 
 ## Introduction

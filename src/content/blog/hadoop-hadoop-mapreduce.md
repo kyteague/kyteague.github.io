@@ -1,7 +1,7 @@
 ---
-title: 'Hadoop != Hadoop MapReduce'
-description: 'Hadoop is a distributed processing framework, not just its MapReduce implementation.'
-pubDate: '2011-10-14T00:00:00Z'
+title: "Hadoop != Hadoop MapReduce"
+description: "Hadoop is a distributed processing framework, not just its MapReduce implementation."
+pubDate: "2011-10-14T00:00:00Z"
 draft: true
 tags:
   - hadoop

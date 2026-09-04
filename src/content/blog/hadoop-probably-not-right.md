@@ -1,7 +1,7 @@
 ---
 title: "Why Hadoop Probably Isn't Right For Your Problem"
-description: 'When Hadoop MapReduce is useful—and why many problems are better solved without it.'
-pubDate: '2011-10-14T00:00:00Z'
+description: "When Hadoop MapReduce is useful—and why many problems are better solved without it."
+pubDate: "2011-10-14T00:00:00Z"
 draft: true
 tags:
   - hadoop
