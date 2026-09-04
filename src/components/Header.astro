@@ -5,7 +5,7 @@ import HeaderLink from "./HeaderLink.astro";
 
 <header class="border-b border-phosphor/20 bg-ink/90 backdrop-blur-sm">
   <nav
-    class="flex min-h-18 w-full flex-col items-start justify-center gap-1 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6"
+    class="site-shell flex min-h-18 flex-col items-start justify-center gap-1 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
     aria-label="Primary navigation"
   >
     <a
@@ -18,7 +18,7 @@ import HeaderLink from "./HeaderLink.astro";
     </a>
 
     <div
-      class="flex w-full items-center justify-between font-mono text-sm font-normal tracking-[0.015em] text-phosphor sm:w-auto sm:justify-start sm:gap-10 sm:text-xl"
+      class="-mx-2 flex w-[calc(100%+1rem)] items-center justify-between font-mono text-sm font-normal tracking-[0.015em] text-phosphor sm:mx-0 sm:-mr-3 sm:w-auto sm:justify-start sm:gap-4 sm:text-base lg:gap-10 lg:text-xl"
     >
       <HeaderLink href="/blog/">Writing</HeaderLink>
       <HeaderLink href="/about/">About</HeaderLink>

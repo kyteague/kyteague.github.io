@@ -13,20 +13,20 @@ const { posts, heading = "Selected writing" } = Astro.props;
 const [featuredPost, ...remainingPosts] = posts;
 ---
 
-<section class="site-shell py-6" aria-labelledby="writing-heading">
+<section class="site-shell pt-8 pb-12" aria-labelledby="writing-heading">
   <h2
     id="writing-heading"
-    class="mb-2 font-mono text-lg font-normal tracking-[0.015em] text-phosphor sm:text-xl"
+    class="mb-4 font-mono text-lg font-normal tracking-[0.015em] text-phosphor sm:text-xl"
   >
     <span class="mr-3" aria-hidden="true">&gt;</span>{heading}
   </h2>
 
   {
     featuredPost ? (
-      <div class="grid gap-2">
+      <div class="grid gap-3">
         <a
           href={`/blog/${featuredPost.id}/`}
-          class="group terminal-border grid overflow-hidden bg-panel/35 no-underline transition duration-200 hover:border-phosphor/65 hover:bg-panel/70 sm:h-[8.75rem] sm:grid-cols-[24.5rem_minmax(0,1fr)]"
+          class="group terminal-border grid overflow-hidden bg-panel/35 no-underline transition duration-200 hover:border-phosphor/65 hover:bg-panel/70 sm:min-h-40 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]"
         >
           <div class="relative min-h-48 overflow-hidden border-b border-phosphor/20 sm:min-h-0 sm:border-r sm:border-b-0">
             {featuredPost.data.heroImage ? (
@@ -45,12 +45,12 @@ const [featuredPost, ...remainingPosts] = posts;
             <div class="absolute inset-0 bg-ink/15" />
           </div>
 
-          <div class="flex min-w-0 items-center justify-between gap-6 px-6 py-5 sm:px-8">
+          <div class="flex min-w-0 items-center justify-between gap-4 px-5 py-6 lg:gap-6 lg:px-8">
             <div class="min-w-0">
               <h3 class="text-xl font-bold leading-tight tracking-tight text-paper transition group-hover:text-phosphor sm:text-[1.7rem]">
                 {featuredPost.data.title}
               </h3>
-              <p class="mt-2 line-clamp-2 text-base leading-relaxed text-muted sm:text-lg">
+              <p class="mt-2 text-base leading-relaxed text-muted sm:text-lg">
                 {featuredPost.data.description}
               </p>
             </div>
@@ -72,16 +72,16 @@ const [featuredPost, ...remainingPosts] = posts;
         {remainingPosts.map((post) => (
           <a
             href={`/blog/${post.id}/`}
-            class="group terminal-border grid min-h-16 grid-cols-[2.25rem_minmax(0,1fr)_auto] items-center gap-3 bg-panel/20 px-4 py-3 no-underline transition duration-200 hover:border-phosphor/60 hover:bg-phosphor/[0.035] sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:px-7"
+            class="group terminal-border grid min-h-16 grid-cols-[1.5rem_minmax(0,1fr)_auto] items-center gap-3 bg-panel/20 px-4 py-3 no-underline transition duration-200 hover:border-phosphor/60 hover:bg-phosphor/[0.035] sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:px-7"
           >
             <span
-              class="font-mono text-lg tracking-[0.12em] text-phosphor"
+              class="font-mono text-lg tracking-[0.12em] whitespace-nowrap text-phosphor"
               aria-hidden="true"
             >
               ::
             </span>
             <div class="min-w-0">
-              <h3 class="line-clamp-2 font-mono text-sm font-normal leading-snug tracking-[0.01em] text-phosphor transition group-hover:text-phosphor-bright sm:text-base">
+              <h3 class="font-mono text-sm font-normal leading-snug tracking-[0.01em] text-phosphor transition group-hover:text-phosphor-bright sm:text-base">
                 {post.data.title}
               </h3>
               <p class="mt-1 font-mono text-[0.62rem] tracking-[0.06em] text-muted uppercase sm:hidden">

@@ -29,7 +29,6 @@
 }
 
 html {
-  min-width: 320px;
   background: var(--color-ink);
   scroll-behavior: smooth;
 }
@@ -96,7 +95,7 @@ kbd {
 }
 
 .site-shell {
-  width: min(100% - 2rem, 93.375rem);
+  width: min(100% - 4rem, 76rem);
   margin-inline: auto;
 }
 
@@ -154,7 +153,7 @@ kbd {
   }
 
   .site-shell {
-    width: min(100% - 1.25rem, 90rem);
+    width: calc(100% - 3rem);
   }
 }
 
