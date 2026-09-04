@@ -4,3 +4,4 @@
 export const SITE_TITLE = "Kyle Teague";
 export const SITE_DESCRIPTION =
 	"Software engineer and fractional CTO helping teams build durable systems and make clear technology decisions.";
+export const SITE_AUTHOR = "Kyle Teague";
