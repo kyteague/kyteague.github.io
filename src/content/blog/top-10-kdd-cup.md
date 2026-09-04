@@ -8,6 +8,9 @@ tags:
   - square counting
 heroImage: "../../assets/kdd-cup-square-counting-v2.png"
 heroImageAlt: "A bipartite recommendation graph with highlighted square patterns feeding ranked predictions"
+citations:
+  - title: "The Love-Hate Square Counting Method for Recommender Systems"
+    url: "https://proceedings.mlr.press/v18/kong12a.html"
 ---
 
 ## Introduction
@@ -28,4 +31,4 @@ So let's say we want to see if you'll like song A. You and a friend both love so
 
 Square counting is an effective algorithm in a bipartite graph with a binary rating system. We have ideas on how to leverage square counting for regression (think soft-max) and other graph types, but this is simply the first iteration. It is essentially a feature extraction stage which transforms the problem from a sparse ratings matrix into a traditional classification problem. The nice part is you can easily parallelize it, then feed the output into any number of machine learning frameworks, which require far less processing time than would be required for a matrix factorization method. Using the [gbm package](https://cran.r-project.org/package=gbm) in R worked just fine for our use case.
 
-[Read the paper](https://proceedings.mlr.press/v18/kong12a/kong12a.pdf) or view the [Just Count the Love-Hate Squares slides](https://www.slideshare.net/slideshow/just-count-the-lovehate-squares/9741700).
+[Read the peer-reviewed paper](https://proceedings.mlr.press/v18/kong12a.html) or view the [Just Count the Love-Hate Squares slides](https://www.slideshare.net/slideshow/just-count-the-lovehate-squares/9741700).

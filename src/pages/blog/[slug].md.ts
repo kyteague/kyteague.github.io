@@ -13,11 +13,17 @@ export const GET: APIRoute = ({ props, site }) => {
   const post = props;
   const canonicalURL = new URL(`/blog/${post.id}/`, site).href;
   const authorURL = new URL("/", site).href;
+  const citations = post.data.citations?.length
+    ? `Sources:\n${post.data.citations
+        .map((citation) => `- [${citation.title}](${citation.url})`)
+        .join("\n")}`
+    : undefined;
   const metadata = [
     `Author: [${SITE_AUTHOR}](${authorURL})`,
     `Published: ${post.data.pubDate.toISOString()}`,
     `Updated: ${(post.data.updatedDate ?? post.data.pubDate).toISOString()}`,
     post.data.tags?.length ? `Topics: ${post.data.tags.join(", ")}` : undefined,
+    citations,
     `Canonical page: ${canonicalURL}`,
   ]
     .filter(Boolean)

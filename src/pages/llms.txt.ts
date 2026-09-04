@@ -17,6 +17,7 @@ export const GET: APIRoute = async ({ site }) => {
         `- [${post.data.title}](${absolute(`/blog/${post.id}.md`)}): ${post.data.description}`,
     )
     .join("\n");
+  const sources = posts.flatMap((post) => post.data.citations ?? []);
 
   const content = `# ${SITE_TITLE}
 
@@ -36,6 +37,12 @@ ${writing}
 
 ## Optional
 
+${sources
+  .map(
+    (source) =>
+      `- [${source.title}](${source.url}): Independent publication record supporting the related article and authorship.`,
+  )
+  .join("\n")}
 - [RSS feed](${absolute("/rss.xml")}): Updates to the published writing archive.
 - [XML sitemap](${absolute("/sitemap-index.xml")}): Index of canonical public pages.
 `;

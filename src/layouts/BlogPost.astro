@@ -8,6 +8,7 @@ import {
   SITE_AUTHOR_BIO,
   SITE_AUTHOR_PROFILES,
   SITE_AUTHOR_ROLE,
+  SITE_TOPICS,
   SITE_TWITTER,
 } from "../consts";
 import BaseLayout from "./BaseLayout.astro";
@@ -22,6 +23,7 @@ const {
   heroImage,
   heroImageAlt,
   tags,
+  citations,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const authorURL = new URL("/", Astro.site).href;
@@ -51,6 +53,7 @@ const blogPostingSchema = {
     url: authorURL,
     description: SITE_AUTHOR_BIO,
     jobTitle: SITE_AUTHOR_ROLE,
+    knowsAbout: SITE_TOPICS,
     sameAs: SITE_AUTHOR_PROFILES,
   },
   publisher: { "@id": personID },
@@ -65,6 +68,13 @@ const blogPostingSchema = {
       }
     : undefined,
   keywords: tags?.length ? tags : undefined,
+  citation: citations?.length
+    ? citations.map((citation) => ({
+        "@type": "ScholarlyArticle",
+        name: citation.title,
+        url: citation.url,
+      }))
+    : undefined,
   inLanguage: "en-US",
   isAccessibleForFree: true,
 };
@@ -90,8 +100,10 @@ const blogPostingSchema = {
           <div
             class="font-mono text-[0.68rem] tracking-[0.1em] text-muted uppercase"
           >
-            By <a class="text-phosphor hover:text-paper" href="/about/"
-              >{SITE_AUTHOR}</a
+            By <a
+              class="text-phosphor hover:text-paper"
+              href="/about/"
+              rel="author">{SITE_AUTHOR}</a
             > · Published <FormattedDate date={pubDate} />
           </div>
           <h1
