@@ -4,7 +4,7 @@
 import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 import defaultSocialImage from "../assets/social-card.svg";
-import { SITE_TITLE } from "../consts";
+import { SITE_AUTHOR, SITE_TITLE } from "../consts";
 import "../styles/global.css";
 
 interface Props {
@@ -21,6 +21,11 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const markdownPath = Astro.url.pathname.endsWith("/")
+  ? `${Astro.url.pathname}index.md`
+  : `${Astro.url.pathname}.md`;
+const markdownURL = new URL(markdownPath, Astro.site);
+const llmsURL = new URL("/llms.txt", Astro.site);
 
 const {
   title,
@@ -58,10 +63,16 @@ const imageMimeType = image
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="robots" content="max-image-preview:large" />
+<meta
+  name="robots"
+  content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+/>
+<meta name="author" content={SITE_AUTHOR} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="describedby" href={llmsURL} />
+<link rel="alternate" type="text/markdown" href={markdownURL} />
 <link
   rel="alternate"
   type="application/rss+xml"

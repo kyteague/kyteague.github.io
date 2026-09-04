@@ -1,6 +1,15 @@
 import type { APIRoute } from "astro";
 
-const robotsTxt = (sitemapURL: URL) => `User-agent: *
+const robotsTxt = (sitemapURL: URL) => `User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: *
 Allow: /
 
 Sitemap: ${sitemapURL.href}
