@@ -1,0 +1,12 @@
+---
+interface Props {
+  data: Record<string, unknown>;
+}
+
+const serializedData = JSON.stringify(Astro.props.data).replace(
+  /</g,
+  "\\u003c",
+);
+---
+
+<script type="application/ld+json" set:html={serializedData} />
