@@ -1,4 +1,5 @@
 ---
+import { IconBrandLinkedin } from "@tabler/icons-astro";
 import { getCollection } from "astro:content";
 import StructuredData from "../components/StructuredData.astro";
 import {
@@ -74,11 +75,14 @@ const profileSchema = {
 
       <div class="mt-10 flex flex-wrap gap-3">
         <a
-          class="terminal-border px-4 py-2 font-mono text-sm text-phosphor transition hover:border-phosphor/60 hover:text-paper"
+          class="terminal-border inline-flex items-center gap-2 px-4 py-2 font-mono text-sm text-phosphor transition hover:border-phosphor/60 hover:text-paper"
           href="https://www.linkedin.com/in/kyleteague"
           target="_blank"
-          rel="me noreferrer">Connect on LinkedIn</a
+          rel="me noreferrer"
         >
+          <IconBrandLinkedin size={18} stroke={1.75} aria-hidden="true" />
+          Connect on LinkedIn
+        </a>
         <a
           class="terminal-border px-4 py-2 font-mono text-sm text-phosphor transition hover:border-phosphor/60 hover:text-paper"
           href="/blog/">Read my writing</a

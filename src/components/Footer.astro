@@ -1,30 +1,46 @@
 ---
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandX,
+} from "@tabler/icons-astro";
+
 const today = new Date();
 ---
 
 <footer id="contact" class="border-t border-phosphor/20 bg-panel/45">
   <div class="site-shell flex flex-col gap-3 py-8 sm:items-end">
-    <div
-      class="flex gap-5 font-mono text-xs tracking-[0.08em] text-phosphor uppercase"
-    >
+    <div class="flex gap-2 text-phosphor">
       <a
-        class="transition hover:text-phosphor-bright"
+        class="inline-flex size-11 items-center justify-center transition-colors hover:bg-phosphor/[0.06] hover:text-paper"
         href="https://github.com/kyteague"
         target="_blank"
-        rel="me noreferrer">GitHub</a
+        rel="me noreferrer"
+        title="GitHub"
       >
+        <IconBrandGithub size={22} stroke={1.75} aria-hidden="true" />
+        <span class="sr-only">GitHub</span>
+      </a>
       <a
-        class="transition hover:text-phosphor-bright"
+        class="inline-flex size-11 items-center justify-center transition-colors hover:bg-phosphor/[0.06] hover:text-paper"
         href="https://twitter.com/kyteague"
         target="_blank"
-        rel="me noreferrer">X / Twitter</a
+        rel="me noreferrer"
+        title="X / Twitter"
       >
+        <IconBrandX size={22} stroke={1.75} aria-hidden="true" />
+        <span class="sr-only">X / Twitter</span>
+      </a>
       <a
-        class="transition hover:text-phosphor-bright"
+        class="inline-flex size-11 items-center justify-center transition-colors hover:bg-phosphor/[0.06] hover:text-paper"
         href="https://www.linkedin.com/in/kyleteague"
         target="_blank"
-        rel="me noreferrer">LinkedIn</a
+        rel="me noreferrer"
+        title="LinkedIn"
       >
+        <IconBrandLinkedin size={22} stroke={1.75} aria-hidden="true" />
+        <span class="sr-only">LinkedIn</span>
+      </a>
     </div>
     <p class="font-mono text-[0.65rem] tracking-[0.08em] text-muted uppercase">
       © {today.getFullYear()} Kyle Teague

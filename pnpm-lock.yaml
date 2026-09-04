@@ -16,6 +16,9 @@ importers:
       "@astrojs/sitemap":
         specifier: ^3.7.4
         version: 3.7.4
+      "@tabler/icons-astro":
+        specifier: ^3.46.0
+        version: 3.46.0(astro@7.2.10(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))
       astro:
         specifier: ^7.2.10
         version: 7.2.10(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)
@@ -1157,6 +1160,20 @@ packages:
     resolution:
       {
         integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==,
+      }
+
+  "@tabler/icons-astro@3.46.0":
+    resolution:
+      {
+        integrity: sha512-hLbPYqiVOAe6SPNRnXyMCmeVJpcqoIiXDqlMjb2deMdhZXZU6FSOtUVUG08T6zBYXqP0CieZZAkvrFgIFHfeCg==,
+      }
+    peerDependencies:
+      astro: ">=4.0.0"
+
+  "@tabler/icons@3.46.0":
+    resolution:
+      {
+        integrity: sha512-f2RYFl3fzPwj5WO82x6en0dmkjefxEfOm16D1ByM6cj/McNiwOkL4VaPUoP9VVIrXAD9WnTSVFr70px703b//A==,
       }
 
   "@tailwindcss/node@4.3.3":
@@ -3794,6 +3811,13 @@ snapshots:
       "@types/hast": 3.0.5
 
   "@shikijs/vscode-textmate@10.0.2": {}
+
+  "@tabler/icons-astro@3.46.0(astro@7.2.10(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))":
+    dependencies:
+      "@tabler/icons": 3.46.0
+      astro: 7.2.10(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)
+
+  "@tabler/icons@3.46.0": {}
 
   "@tailwindcss/node@4.3.3":
     dependencies:
