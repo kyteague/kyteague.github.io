@@ -1,6 +1,5 @@
 ---
 import { IconBrandLinkedin } from "@tabler/icons-astro";
-import { getCollection } from "astro:content";
 import StructuredData from "../components/StructuredData.astro";
 import {
   SITE_AUTHOR,
@@ -11,9 +10,6 @@ import {
 } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
 const pageURL = new URL("/about/", Astro.site).href;
 const personURL = new URL("/", Astro.site).href;
 const personID = new URL("/#person", Astro.site).href;
@@ -88,37 +84,6 @@ const profileSchema = {
           href="/blog/">Read my writing</a
         >
       </div>
-    </section>
-
-    <section
-      class="site-shell border-t border-phosphor/20 py-12 sm:py-16"
-      aria-labelledby="selected-work"
-    >
-      <h2
-        id="selected-work"
-        class="font-mono text-lg font-normal tracking-[0.015em] text-phosphor sm:text-xl"
-      >
-        <span class="mr-3" aria-hidden="true">&gt;</span>Selected work
-      </h2>
-      <ul class="mt-6 grid gap-3">
-        {
-          posts.map((post) => (
-            <li>
-              <a
-                class="group terminal-border block bg-panel/20 px-5 py-4 no-underline transition hover:border-phosphor/60 hover:bg-panel/40"
-                href={`/blog/${post.id}/`}
-              >
-                <span class="font-mono text-sm text-phosphor transition group-hover:text-paper">
-                  {post.data.title}
-                </span>
-                <span class="mt-1 block text-sm leading-relaxed text-muted">
-                  {post.data.description}
-                </span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </section>
   </main>
 </BaseLayout>
