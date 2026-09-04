@@ -9,4 +9,4 @@ const serializedData = JSON.stringify(Astro.props.data).replace(
 );
 ---
 
-<script type="application/ld+json" set:html={serializedData} />
+<script is:inline type="application/ld+json" set:html={serializedData} />

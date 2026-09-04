@@ -42,7 +42,9 @@ export default defineConfig({
     sitemap({
       serialize(item) {
         const lastModified = blogLastModified.get(new URL(item.url).pathname);
-        return lastModified ? { ...item, lastmod: lastModified } : item;
+        return lastModified
+          ? { ...item, lastmod: lastModified.toISOString() }
+          : item;
       },
     }),
   ],

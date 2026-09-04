@@ -1,4 +1,4 @@
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import type { APIRoute, GetStaticPaths } from "astro";
 import { SITE_AUTHOR } from "../../consts";
 
@@ -7,7 +7,7 @@ export const getStaticPaths = (async () => {
   return posts.map((post) => ({ params: { slug: post.id }, props: post }));
 }) satisfies GetStaticPaths;
 
-export const GET: APIRoute = ({ props, site }) => {
+export const GET: APIRoute<CollectionEntry<"blog">> = ({ props, site }) => {
   if (!site) throw new Error("The Astro site URL is required");
 
   const post = props;
