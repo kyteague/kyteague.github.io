@@ -31,6 +31,7 @@
 html {
   background: var(--color-ink);
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
