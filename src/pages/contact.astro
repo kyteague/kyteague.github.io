@@ -1,0 +1,85 @@
+---
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandX,
+  IconMail,
+} from "@tabler/icons-astro";
+import { SITE_AUTHOR } from "../consts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const methods = [
+  {
+    label: "Email",
+    value: "kyteague@gmail.com",
+    href: "mailto:kyteague@gmail.com",
+    icon: IconMail,
+  },
+  {
+    label: "LinkedIn",
+    value: "kyleteague",
+    href: "https://www.linkedin.com/in/kyleteague",
+    icon: IconBrandLinkedin,
+  },
+  {
+    label: "GitHub",
+    value: "kyteague",
+    href: "https://github.com/kyteague",
+    icon: IconBrandGithub,
+  },
+  {
+    label: "X / Twitter",
+    value: "@kyteague",
+    href: "https://twitter.com/kyteague",
+    icon: IconBrandX,
+  },
+];
+---
+
+<BaseLayout
+  title={`Contact ${SITE_AUTHOR}`}
+  description="Get in touch with Kyle Teague by email or find him on LinkedIn, GitHub, and X."
+>
+  <main>
+    <section class="site-shell py-16 sm:py-20">
+      <p class="terminal-kicker">Contact</p>
+      <h1
+        class="mt-4 text-[clamp(2.75rem,5vw,4.75rem)] font-normal leading-[1.08] text-paper"
+      >
+        Get in touch<span class="text-phosphor">.</span>
+      </h1>
+
+      <ul
+        class="mt-10 max-w-2xl divide-y divide-phosphor/20 border-y border-phosphor/20"
+      >
+        {
+          methods.map(({ label, value, href, icon: Icon }) => (
+            <li>
+              <a
+                href={href}
+                target={href.startsWith("https:") ? "_blank" : undefined}
+                rel={href.startsWith("https:") ? "me noreferrer" : undefined}
+                class="group flex items-center gap-4 py-5 text-phosphor no-underline transition-colors hover:text-paper"
+              >
+                <Icon
+                  size={24}
+                  stroke={1.75}
+                  aria-hidden="true"
+                  class="shrink-0"
+                />
+                <span class="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6">
+                  <span class="w-28 shrink-0 font-mono text-sm text-muted">
+                    {label}
+                  </span>
+                  <span class="break-all text-lg group-hover:underline underline-offset-4">
+                    {value}
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+</BaseLayout>
