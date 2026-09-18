@@ -1,6 +1,7 @@
 ---
 import { IconBrandLinkedin, IconFileText } from "@tabler/icons-astro";
 import StructuredData from "../components/StructuredData.astro";
+import { Content, frontmatter } from "../content/about.md";
 import {
   SITE_AUTHOR,
   SITE_AUTHOR_BIO,
@@ -46,27 +47,10 @@ const profileSchema = {
       <h1
         class="mt-4 text-[clamp(2.75rem,5vw,4.75rem)] font-normal leading-[1.08] text-paper"
       >
-        I’m Kyle Teague<span class="text-phosphor">.</span>
+        {frontmatter.heading}<span class="text-phosphor">.</span>
       </h1>
       <div class="mt-6 max-w-3xl space-y-5 text-lg leading-relaxed text-muted">
-        <p>
-          I’m a software engineer and fractional CTO. I design systems, lead
-          technical teams, and help companies make difficult technology
-          decisions.
-        </p>
-        <p>
-          My work and writing span software architecture, distributed systems,
-          data engineering, machine learning, engineering leadership, and
-          technology strategy. I’m most interested in the choices that make
-          software durable: clear constraints, simple interfaces, and systems
-          teams can operate with confidence.
-        </p>
-        <p>
-          In 2011, my team placed ninth in the Yahoo! KDD Cup using a
-          graph-based “square counting” method for recommendation. I publish
-          technical field notes here, including the approach behind that result
-          and practical lessons from building data-intensive systems.
-        </p>
+        <Content />
       </div>
 
       <div class="mt-10 flex flex-wrap gap-3">
