@@ -17,10 +17,6 @@ const isActive =
   href={href}
   class:list={[
     "group inline-flex items-center gap-2 px-2 py-2 text-phosphor no-underline transition-colors hover:text-paper sm:px-3",
-    {
-      "underline decoration-phosphor/65 decoration-1 underline-offset-[0.45em]":
-        isActive,
-    },
     className,
   ]}
   aria-current={isActive ? "page" : undefined}
@@ -29,5 +25,12 @@ const isActive =
   <span class="transition-colors group-hover:text-paper" aria-hidden="true"
     >&gt;</span
   >
-  <slot />
+  <span
+    class:list={{
+      "underline decoration-phosphor/65 decoration-1 underline-offset-[0.45em]":
+        isActive,
+    }}
+  >
+    <slot />
+  </span>
 </a>
