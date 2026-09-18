@@ -1,5 +1,5 @@
 ---
-import { IconBrandLinkedin } from "@tabler/icons-astro";
+import { IconBrandLinkedin, IconFileText } from "@tabler/icons-astro";
 import StructuredData from "../components/StructuredData.astro";
 import {
   SITE_AUTHOR,
@@ -70,6 +70,13 @@ const profileSchema = {
       </div>
 
       <div class="mt-10 flex flex-wrap gap-3">
+        <a
+          class="terminal-border inline-flex items-center gap-2 px-4 py-2 font-mono text-sm text-phosphor transition hover:border-phosphor/60 hover:text-paper"
+          href="/Resume%20-%20Kyle%20Teague.16afb3e.pdf"
+        >
+          <IconFileText size={18} stroke={1.75} aria-hidden="true" />
+          View resume
+        </a>
         <a
           class="terminal-border inline-flex items-center gap-2 px-4 py-2 font-mono text-sm text-phosphor transition hover:border-phosphor/60 hover:text-paper"
           href="https://www.linkedin.com/in/kyleteague"

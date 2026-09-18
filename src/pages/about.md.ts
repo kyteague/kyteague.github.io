@@ -20,6 +20,8 @@ Kyle's work and writing span ${topics}. He is most interested in the choices tha
 
 In 2011, Kyle's team placed ninth in the Yahoo! KDD Cup using a graph-based "square counting" method for recommendation. He publishes technical field notes on this site, including the approach behind that result and practical lessons from building data-intensive systems.
 
+[View resume](${absolute("/Resume%20-%20Kyle%20Teague.16afb3e.pdf")})
+
 ## Verified profiles
 
 ${SITE_AUTHOR_PROFILES.map((profile) => `- ${profile}`).join("\n")}
