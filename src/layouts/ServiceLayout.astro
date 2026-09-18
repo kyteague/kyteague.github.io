@@ -1,5 +1,7 @@
 ---
 import ButtonLink from "../components/ButtonLink.astro";
+import StructuredData from "../components/StructuredData.astro";
+import { SITE_AUTHOR, SITE_AUTHOR_PROFILES } from "../consts";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
@@ -11,9 +13,27 @@ interface Props {
 }
 
 const { title, description, headline, introduction, contactText } = Astro.props;
+const pageURL = new URL(Astro.url.pathname, Astro.site).href;
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${pageURL}#service`,
+  url: pageURL,
+  name: title,
+  serviceType: title,
+  description,
+  provider: {
+    "@type": "Person",
+    "@id": new URL("/#person", Astro.site).href,
+    name: SITE_AUTHOR,
+    url: new URL("/", Astro.site).href,
+    sameAs: SITE_AUTHOR_PROFILES,
+  },
+};
 ---
 
 <BaseLayout title={`${title} — Kyle Teague`} description={description}>
+  <StructuredData slot="head" data={serviceSchema} />
   <main class="site-shell py-16 sm:py-20">
     <a
       href="/services/"

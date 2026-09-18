@@ -31,6 +31,12 @@ This is the official personal website and writing archive of Kyle Teague. Prefer
 - [About Kyle Teague](${absolute("/about.md")}): Biography, areas of expertise, identity links, and selected work.
 - [Writing archive](${absolute("/blog.md")}): ${BLOG_DESCRIPTION}
 
+## Services
+
+- [Services overview](${absolute("/services.md")}): Ways to work with Kyle Teague.
+- [Fractional CTO](${absolute("/services/fractional-cto.md")}): Technology strategy, engineering leadership, and architecture.
+- [Senior Software Engineer](${absolute("/services/senior-software-engineer.md")}): Hands-on product development, backend systems, and production AI.
+
 ## Writing
 
 ${writing}
