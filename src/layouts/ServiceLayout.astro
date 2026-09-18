@@ -1,0 +1,76 @@
+---
+import ButtonLink from "../components/ButtonLink.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  headline: string;
+  introduction: string;
+  contactText: string;
+}
+
+const { title, description, headline, introduction, contactText } = Astro.props;
+---
+
+<BaseLayout title={`${title} — Kyle Teague`} description={description}>
+  <main class="site-shell py-16 sm:py-20">
+    <a
+      href="/services/"
+      class="font-mono text-sm text-phosphor underline underline-offset-4"
+      >← All services</a
+    >
+    <section class="mt-10 border-b border-phosphor/20 pb-12">
+      <p class="terminal-kicker">{title}</p>
+      <h1
+        class="mt-4 max-w-4xl text-[clamp(2.5rem,5vw,4.75rem)] font-normal leading-[1.08] text-paper"
+      >
+        {headline}<span class="text-phosphor">.</span>
+      </h1>
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+        {introduction}
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <ButtonLink href="/contact/">Let’s talk</ButtonLink>
+        <ButtonLink
+          href="/Resume%20-%20Kyle%20Teague.16afb3e.pdf"
+          variant="secondary">View résumé</ButtonLink
+        >
+      </div>
+    </section>
+
+    <div class="service-content border-b border-phosphor/20 pb-12">
+      <slot />
+    </div>
+
+    <section class="pt-12" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="text-3xl font-normal text-paper">
+        Tell me what you’re working on
+      </h2>
+      <p class="mt-4 max-w-2xl text-lg text-muted">{contactText}</p>
+      <div class="mt-7">
+        <ButtonLink href="/contact/">Get in touch</ButtonLink>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .service-content :global(h2) {
+    margin-top: 3rem;
+    font-size: 1.875rem;
+    line-height: 1.3;
+    color: var(--color-paper);
+  }
+  .service-content :global(h3) {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    color: var(--color-paper);
+  }
+  .service-content :global(p) {
+    margin-top: 0.75rem;
+    max-width: 48rem;
+    line-height: 1.75;
+    color: var(--color-muted);
+  }
+</style>

@@ -1,0 +1,14 @@
+---
+import ServiceLayout from "../../layouts/ServiceLayout.astro";
+import { Content, frontmatter } from "../../content/services/fractional-cto.md";
+---
+
+<ServiceLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  headline={frontmatter.headline}
+  introduction={frontmatter.introduction}
+  contactText={frontmatter.contactText}
+>
+  <Content />
+</ServiceLayout>
