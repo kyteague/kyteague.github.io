@@ -1,5 +1,5 @@
 ---
-import { IconBrandLinkedin, IconFileText } from "@tabler/icons-astro";
+import { IconMail, IconFileText } from "@tabler/icons-astro";
 import StructuredData from "../components/StructuredData.astro";
 import { Content, frontmatter } from "../content/about.md";
 import {
@@ -63,17 +63,11 @@ const profileSchema = {
         </a>
         <a
           class="terminal-border inline-flex items-center gap-2 px-4 py-2 font-mono text-sm text-phosphor transition hover:border-phosphor/60 hover:text-paper"
-          href="https://www.linkedin.com/in/kyleteague"
-          target="_blank"
-          rel="me noreferrer"
+          href="/contact/"
         >
-          <IconBrandLinkedin size={18} stroke={1.75} aria-hidden="true" />
-          Connect on LinkedIn
+          <IconMail size={18} stroke={1.75} aria-hidden="true" />
+          Contact me
         </a>
-        <a
-          class="terminal-border px-4 py-2 font-mono text-sm text-phosphor transition hover:border-phosphor/60 hover:text-paper"
-          href="/blog/">Read my writing</a
-        >
       </div>
     </section>
   </main>
