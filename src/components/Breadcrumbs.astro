@@ -1,0 +1,78 @@
+---
+interface Props {
+  parents: { label: string; href: string }[];
+  current: string;
+}
+
+const { parents, current } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+  <ol role="list" class="terminal-kicker">
+    {
+      parents.map(({ label, href }) => (
+        <li>
+          <a href={href}>{label}</a>
+          <span class="separator" aria-hidden="true">
+            &gt;
+          </span>
+        </li>
+      ))
+    }
+    <li class="current" aria-current="page">{current}</li>
+  </ol>
+</nav>
+
+<style>
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.65rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ol::before {
+    margin-right: 0;
+  }
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    min-width: 0;
+  }
+
+  a {
+    position: relative;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.3em;
+    transition:
+      color 150ms,
+      text-decoration-color 150ms;
+  }
+
+  /* Enlarge the touch target without changing the shared kicker spacing. */
+  a::after {
+    position: absolute;
+    inset: -0.85rem -0.25rem;
+    content: "";
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: var(--color-paper);
+    text-decoration-color: currentColor;
+  }
+
+  .separator {
+    color: var(--color-muted);
+  }
+
+  .current {
+    overflow-wrap: anywhere;
+  }
+</style>

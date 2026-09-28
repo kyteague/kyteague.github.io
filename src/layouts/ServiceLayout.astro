@@ -1,5 +1,6 @@
 ---
 import ButtonLink from "../components/ButtonLink.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import StructuredData from "../components/StructuredData.astro";
 import { SITE_AUTHOR, SITE_AUTHOR_PROFILES } from "../consts";
 import BaseLayout from "./BaseLayout.astro";
@@ -35,15 +36,13 @@ const serviceSchema = {
 <BaseLayout title={`${title} — Kyle Teague`} description={description}>
   <StructuredData slot="head" data={serviceSchema} />
   <main class="site-shell py-16 sm:py-20">
-    <a
-      href="/services/"
-      class="font-mono text-sm text-phosphor underline underline-offset-4"
-      >← All services</a
-    >
-    <section class="mt-10 border-b border-phosphor/20 pb-12">
-      <p class="terminal-kicker">{title}</p>
+    <Breadcrumbs
+      parents={[{ label: "Services", href: "/services/" }]}
+      current={title}
+    />
+    <section class="mt-4 border-b border-phosphor/20 pb-12">
       <h1
-        class="mt-4 max-w-4xl text-[clamp(2.5rem,5vw,4.75rem)] font-normal leading-[1.08] text-paper"
+        class="max-w-4xl text-[clamp(2.75rem,5vw,4.75rem)] font-normal leading-[1.08] text-paper"
       >
         {headline}<span class="text-phosphor">.</span>
       </h1>
