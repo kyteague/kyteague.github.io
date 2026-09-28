@@ -19,4 +19,4 @@ services:
   ]
 ---
 
-’m Kyle Teague. I’ve led engineering teams as a CTO and VP of Engineering, built products as a founder, and written software for systems serving millions of users. I’m especially good at helping early-stage companies turn a barely working prototype into a product customers can actually use. Here are two ways we can work together.
+I’m Kyle Teague. I’ve led engineering teams as a CTO and VP of Engineering, built products as a founder, and written software for systems serving millions of users. I’m especially good at helping early-stage companies turn a barely working prototype into a product customers can actually use. Here are two ways we can work together.
