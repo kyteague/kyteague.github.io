@@ -8,7 +8,6 @@ export const GET: APIRoute = ({ site }) => {
     title: string;
     href: string;
     description: string;
-    detail: string;
   }[] = frontmatter.services;
   return new Response(
     `# ${frontmatter.title} — Kyle Teague
@@ -19,7 +18,7 @@ ${frontmatter.headline}.
 
 ${rawContent().trim()}
 
-${services.map((service) => `## [${service.title}](${absolute(service.href)})\n\n${service.description}\n\n${service.detail}`).join("\n\n")}
+${services.map((service) => `## [${service.title}](${absolute(service.href)})\n\n${service.description}`).join("\n\n")}
 
 ## ${frontmatter.contactHeading}
 

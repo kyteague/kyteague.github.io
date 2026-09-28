@@ -9,7 +9,6 @@ const services: {
   title: string;
   href: string;
   description: string;
-  detail: string;
 }[] = frontmatter.services;
 ---
 
@@ -29,7 +28,7 @@ const services: {
 
     <div class="mt-12 grid gap-6 md:grid-cols-2">
       {
-        services.map(({ title, href, description, detail }) => (
+        services.map(({ title, href, description }) => (
           <section class="terminal-border flex flex-col bg-panel p-6 sm:p-8">
             <h2 class="text-3xl font-normal text-paper">
               <a href={href} class="hover:text-phosphor">
@@ -37,12 +36,6 @@ const services: {
               </a>
             </h2>
             <p class="mt-4 text-lg leading-relaxed text-muted">{description}</p>
-            <p class="mt-5 text-sm leading-relaxed text-muted">{detail}</p>
-            <div class="mt-auto pt-8">
-              <ButtonLink href={href} variant="secondary">
-                Explore <span class="sr-only">{title}</span>services
-              </ButtonLink>
-            </div>
           </section>
         ))
       }
