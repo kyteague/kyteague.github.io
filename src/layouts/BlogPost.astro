@@ -155,7 +155,9 @@ const blogPostingSchema = {
       <div
         class="prose-content site-shell mx-auto max-w-3xl pt-8 pb-14 sm:px-6 sm:pt-10 sm:pb-20"
       >
-        <slot />
+        <div class="markdown-content">
+          <slot />
+        </div>
         {
           updatedDate && (
             <footer class="mt-14 text-right font-mono text-[0.68rem] tracking-[0.08em] text-muted/70 uppercase">
@@ -207,7 +209,7 @@ const blogPostingSchema = {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
   }
 
-  :global(.prose-content > h2:first-child) {
+  .prose-content :global(.markdown-content > h2:first-child) {
     margin-top: 0;
   }
 
