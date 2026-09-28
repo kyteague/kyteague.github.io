@@ -2,8 +2,8 @@
 title: "Services"
 description: "Work with Kyle Teague as a fractional CTO or senior software engineer. Technical leadership and hands-on development grounded in experience building and scaling software."
 headline: "Technical leadership. Hands-on engineering"
-contactHeading: "Not sure which fits?"
-contactText: "Tell me about your team, what you’re building, and where you need help. We can figure out the right scope together."
+contactHeading: "Let’s work together"
+contactText: "Tell me what you’re building and where I can help. Let’s talk scope, timing, and next steps."
 services:
   [
     {
