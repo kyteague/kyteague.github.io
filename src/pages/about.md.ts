@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ site }) => {
 
 ${rawContent().trim()}
 
-[View resume](${absolute("/Resume%20-%20Kyle%20Teague.16afb3e.pdf")})
+[View résumé](${absolute("/Resume%20-%20Kyle%20Teague.16afb3e.pdf")})
 
 ## Verified profiles
 
