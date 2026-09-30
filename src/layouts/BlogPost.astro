@@ -29,7 +29,7 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const authorURL = new URL("/", Astro.site).href;
 const personID = new URL("/#person", Astro.site).href;
-const websiteID = new URL("/#website", Astro.site).href;
+const blogID = new URL("/blog/#blog", Astro.site).href;
 const imageURL = heroImage
   ? new URL(heroImage.src, Astro.site).href
   : undefined;
@@ -58,7 +58,7 @@ const blogPostingSchema = {
     sameAs: SITE_AUTHOR_PROFILES,
   },
   publisher: { "@id": personID },
-  isPartOf: { "@id": websiteID },
+  isPartOf: { "@type": "Blog", "@id": blogID },
   image: imageURL
     ? {
         "@type": "ImageObject",

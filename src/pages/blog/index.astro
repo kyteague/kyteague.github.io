@@ -11,25 +11,40 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 );
 const tags = getBlogTags(posts);
 const pageURL = new URL("/blog/", Astro.site).href;
+const blogID = new URL("/blog/#blog", Astro.site).href;
 const collectionSchema = {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "@id": pageURL,
-  url: pageURL,
-  name: `Writing by ${SITE_AUTHOR}`,
-  description: BLOG_DESCRIPTION,
-  inLanguage: "en-US",
-  isPartOf: { "@id": new URL("/#website", Astro.site).href },
-  author: { "@id": new URL("/#person", Astro.site).href },
-  mainEntity: {
-    "@type": "ItemList",
-    itemListElement: posts.map((post, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: new URL(`/blog/${post.id}/`, Astro.site).href,
-      name: post.data.title,
-    })),
-  },
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": pageURL,
+      url: pageURL,
+      name: `Writing by ${SITE_AUTHOR}`,
+      description: BLOG_DESCRIPTION,
+      inLanguage: "en-US",
+      isPartOf: { "@id": new URL("/#website", Astro.site).href },
+      author: { "@id": new URL("/#person", Astro.site).href },
+      mainEntity: { "@id": blogID },
+    },
+    {
+      "@type": "Blog",
+      "@id": blogID,
+      url: pageURL,
+      name: `Writing by ${SITE_AUTHOR}`,
+      description: BLOG_DESCRIPTION,
+      inLanguage: "en-US",
+      isPartOf: { "@id": new URL("/#website", Astro.site).href },
+      author: { "@id": new URL("/#person", Astro.site).href },
+      publisher: { "@id": new URL("/#person", Astro.site).href },
+      mainEntityOfPage: { "@id": pageURL },
+      blogPost: posts.map((post) => ({
+        "@type": "BlogPosting",
+        "@id": new URL(`/blog/${post.id}/#article`, Astro.site).href,
+        url: new URL(`/blog/${post.id}/`, Astro.site).href,
+        headline: post.data.title,
+      })),
+    },
+  ],
 };
 ---
 
