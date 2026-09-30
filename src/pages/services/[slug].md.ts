@@ -33,7 +33,7 @@ ${rawContent().trim()}
 ${data.contactText}
 
 [Get in touch](${absolute("/contact/")})
-[View résumé](${absolute("/Resume%20-%20Kyle%20Teague.16afb3e.pdf")})
+[More about me](${absolute("/about/")})
 [All services](${absolute("/services/")})
 
 Canonical page: ${absolute(`/services/${params.slug}/`)}
